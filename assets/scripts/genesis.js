@@ -1,4 +1,4 @@
-var newsApiKey = "XXX";
+var newsApiKey = "2a4cf3a31d9040d5b3ffac344cc44dff"; //David added newsApiKey
 var tickerApiKey = "YYY";
 var favoritesArray = [];
 
