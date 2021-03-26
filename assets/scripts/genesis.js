@@ -16,7 +16,7 @@ function deleteFavorite(stockTicker) {
 }
 
 // Save ticker symbol to local storage
-// David F
+// David Figueroa
 function saveTicker(stockTicker) {
     // Only store the stock ticker if it hasn't been previously stored
     if (!favoritesArray ||
@@ -33,7 +33,7 @@ function saveTicker(stockTicker) {
 }
 
 // Get News Web API Call
-// David F
+// David Figueroa
 function getNews(stockTicker) {
     var newsApiUrl = encodeURI(`https://newsapi.org/v2/everything?q=${stockTicker}&from=2021-03-25&sortBy=popularity&apiKey=${newsApiKey}`);
 
