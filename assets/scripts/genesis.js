@@ -3,6 +3,7 @@ var tickerApiKey = "YYY";
 var favoritesArray = [];
 
 // Delete ticker symbol from local storage and favoritesArray
+// Mark H
 function deleteFavorite(stockTicker) {
     // Remove from Array
     // ..... need code here
@@ -15,6 +16,7 @@ function deleteFavorite(stockTicker) {
 }
 
 // Save ticker symbol to local storage
+// David F
 function saveTicker(stockTicker) {
     // Only store the stock ticker if it hasn't been previously stored
     if (!favoritesArray ||
@@ -31,6 +33,7 @@ function saveTicker(stockTicker) {
 }
 
 // Get News Web API Call
+// David F
 function getNews(stockTicker) {
     var newsApiUrl = encodeURI(`https://newsapi.org/v2/everything?q=${stockTicker}&from=2021-03-25&sortBy=popularity&apiKey=${newsApiKey}`);
 
@@ -56,6 +59,7 @@ function getNews(stockTicker) {
 }
 
 // Get Favorites Info
+// Justin B
 function getFavoritesInfo() {
     var storedFavorites = JSON.parse(localStorage.getItem("favoriteStocks"));
     if (storedFavorites) {
@@ -84,6 +88,8 @@ function getFavoritesInfo() {
     return;
 }
 
+// Get Ticker Info for left hand side
+// Justin B
 function getTickerInfo(tickerName) {
     var stockApiUrl = encodeURI(`https://api.twelvedata.com/complex_data?apikey=${tickerApiKey}`);
     fetch(stockApiUrl, {
@@ -104,6 +110,7 @@ function getTickerInfo(tickerName) {
 }
 
 // Build the ticker info section
+// Justin B
 function buildTickerInfo(tickerName, data) {
     // Clear out ticker info for searched ticker symbol
     $("#tickerInfo").empty();
@@ -121,6 +128,7 @@ function buildTickerInfo(tickerName, data) {
 }
 
 // Build the favorites section
+// Justin B
 function buildFavorites(data) {
     // Clear out any previous favorites html elements
     $("#favorites").empty();
@@ -156,6 +164,7 @@ function buildFavorites(data) {
 }
 
 // Build the news section
+// David F
 function buildNews(data) {
     // Clear out any previous news html elements
     $("#news").empty();
@@ -171,6 +180,7 @@ function buildNews(data) {
 }
 
 // Listen for the search button to be clicked
+// Mark H
 $("#searchTicker").on("click", function (event) {
     // Preventing the button from trying to submit the form......
     event.preventDefault();
@@ -188,6 +198,7 @@ $("#searchTicker").on("click", function (event) {
 });
 
 // Listen for one of the favorites to be clicked
+// Mark H
 $("#favorites").on('click', '.btn', function (event) {
     event.preventDefault();
     // Need to check and see if they clicked on Delete, News, or Info buttons
