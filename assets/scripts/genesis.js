@@ -59,7 +59,7 @@ function getNews(stockTicker) {
 }
 
 // Get Favorites Info
-// Justin B
+// Justin Byrd
 function getFavoritesInfo() {
     var storedFavorites = JSON.parse(localStorage.getItem("favoriteStocks"));
     if (storedFavorites) {
