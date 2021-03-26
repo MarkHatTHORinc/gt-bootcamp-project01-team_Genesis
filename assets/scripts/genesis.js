@@ -16,7 +16,7 @@ function deleteFavorite(stockTicker) {
 }
 
 // Save ticker symbol to local storage
-// David F
+// David Figueroa
 function saveTicker(stockTicker) {
     // Only store the stock ticker if it hasn't been previously stored
     if (!favoritesArray ||
