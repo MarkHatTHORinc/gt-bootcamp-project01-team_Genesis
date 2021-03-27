@@ -172,9 +172,10 @@ function buildFavorites(data) {
 // David F
 function buildNews(data) {
     // Clear out any previous news html elements
-    $("#news").empty();
+    $("#container-news").empty();
     // create elements for news
     var newsEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2'>");
+       // var newsEl = $("<div class='container shadow-lg text-white bg-primary mx-auto mb-10 p-2'>");
     // .....
     // .....
     // Need to add data to news elements  
