@@ -35,7 +35,7 @@ function saveTicker(stockTicker) {
 // Get News Web API Call
 // David Figueroa
 function getNews(stockTicker) {
-    var newsApiUrl = encodeURI(`https://newsapi.org/v2/everything?q=${stockTicker}&from=2021-03-25&sortBy=popularity&apiKey=${newsApiKey}`);
+    var newsApiUrl = encodeURI(`https://newsapi.org/v2/everything?q=${stockTicker}&from=2021-03-25&sortBy=publishedAt&apiKey=${newsApiKey}`);
 
     fetch(newsApiUrl, {
         method: 'GET', //GET is the default.
