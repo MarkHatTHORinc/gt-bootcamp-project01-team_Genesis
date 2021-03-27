@@ -1,0 +1,174 @@
+#bg {
+    /* Set rules to fill background */
+    min-height: 100%;
+    min-width: 1024px;
+  
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+  
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  @media screen and (max-width: 1024px) { /* Specific to this particular image */
+    img.bg {
+      left: 50%;
+      margin-left: -512px;   /* 50% */
+    }
+  }
+
+.jumbo{
+    border-style: solid;
+    border-width: 1px;
+    background-color: whitesmoke;
+}
+
+#jumbo-text{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+#ticker-container{
+    border-style: solid;
+    border-width: 1px;
+    height: 400px;
+    width: 500px;
+    position: relative;
+    right: 320px;
+    background-color: whitesmoke;
+    opacity: 85%;
+}
+
+#ticker-name{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: oblique;
+}
+
+#favorites{
+    border-style: none;
+    position: relative;
+    right: 85px;
+    bottom: 400px;
+    height: 400px;
+    border-width: 1px;
+    margin-right: 0.5px;
+    width: 620px;
+}
+
+
+#fav1{
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    width: 150px;
+    height: 150px;
+    left: 10px;
+    background-color: whitesmoke}
+
+#fav2{
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    width: 150px;
+    height: 150px;
+    top: 100px;
+    left: 10px;
+    background-color: whitesmoke}
+#fav3{
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    width: 150px;
+    height: 150px;
+    bottom: 300px;
+    left: 230px; 
+    background-color: whitesmoke}
+
+#fav4{
+    position: relative;
+    border-style:solid;
+    border-width: 1px;
+    width: 150px;
+    height: 150px;
+    bottom: 200px;
+    left: 230px;
+    background-color: whitesmoke}
+
+#fav5{
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    width: 150px;
+    height:150px;
+    bottom: 600px;
+    left: 450px;
+    background-color: whitesmoke;    
+}
+
+#fav6{
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    width: 150px;
+    height:150px;
+    bottom: 500px;
+    left: 450px;  
+    background-color: whitesmoke; 
+}
+.savebtn1info,
+.savebtn2info,
+.savebtn3info,
+.savebtn4info,
+.savebtn5info,
+.savebtn6info{
+    width: 40px;
+    position: relative;
+    top: 3px;
+    right: 10px;
+    opacity: 90%;
+}
+
+.savebtn1news,
+.savebtn2news,
+.savebtn3news,
+.savebtn4news,
+.savebtn5news,
+.savebtn6news{
+    width: 40px;
+    position: relative;
+    bottom: 35px;
+    left: 41px;
+    opacity: 90%;
+}
+.savebtn1del,
+.savebtn2del,
+.savebtn3del,
+.savebtn4del,
+.savebtn5del,
+.savebtn6del{
+    width: 40px;
+    position: relative;
+    bottom: 73px;
+    left: 94px;
+    opacity: 90%; 
+}
+
+.row p{
+    position: relative;
+    right: 9px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+#container-news{
+    border-style: solid;
+    height: 300px;
+    position: relative;
+    bottom: 350px;
+    border-width: 1px;
+    background-color: whitesmoke;
+    opacity: 85%;
+} 
