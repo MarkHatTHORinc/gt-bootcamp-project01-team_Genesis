@@ -149,21 +149,21 @@ function buildFavorites(data) {
         var tickerCurrentPrice = ticker.currentPrice;
 
         // Creating tags with the result items
-        var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
-        var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  ${tickerOpeningPrice}`);
-        var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  ${tickerCurrentPrice}`);
-        var tickerIconEl = <i class="fas fa-arrow-down"></i>;
-        if (tickerOpeningPrice < tickerCurrentPrice) {
-            tickerIconEl = <i class="fas fa-arrow-up"></i>;
-        }
-        tickerIconEl.attr("style", "height: 40px; width: 40px");
+        // var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
+        // var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  ${tickerOpeningPrice}`);
+        // var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  ${tickerCurrentPrice}`);
+        // var tickerIconEl = <i class="fas fa-arrow-down"></i>;
+        // if (tickerOpeningPrice < tickerCurrentPrice) {
+        //     tickerIconEl = <i class="fas fa-arrow-up"></i>;
+        // }
+        // tickerIconEl.attr("style", "height: 40px; width: 40px");
 
-        // Append elements to forecastEl
-        tickerEl.append(tickerSymbolEl);
-        tickerEl.append(tickerOpeningPriceEl);
-        tickerEl.append(tickerCurrentPriceEl);
-        tickerEl.append(tickerIconEl);
-        $("#favorites").append(tickerEl);
+        // // Append elements to forecastEl
+        // tickerEl.append(tickerSymbolEl);
+        // tickerEl.append(tickerOpeningPriceEl);
+        // tickerEl.append(tickerCurrentPriceEl);
+        // tickerEl.append(tickerIconEl);
+        // $("#favorites").append(tickerEl);
     })
     return;
 }
