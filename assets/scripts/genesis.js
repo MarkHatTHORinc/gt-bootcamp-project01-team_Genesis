@@ -1,5 +1,5 @@
 var newsApiKey = "XXX";
-var tickerApiKey = "YYY";
+var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
 
 // Delete ticker symbol from local storage and favoritesArray
@@ -67,11 +67,11 @@ function getNews(stockTicker) {
 // Justin Byrd
 function getFavoritesInfo() {
     var storedFavorites = JSON.parse(localStorage.getItem("favoriteStocks"));
-    if (storedFavorites) {
-        favoritesArray = storedFavorites;
+    if (storedFavorites.length == 0) {
+        //nothing to build
+        return;
     }
-    // need to add each element of the favorites array to the URL below....
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/complex_data?apikey=${tickerApiKey}`);
+    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
 
     fetch(stockApiUrl, {
         method: 'GET', //GET is the default.
@@ -152,11 +152,11 @@ function buildFavorites(data) {
         var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
         var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  ${tickerOpeningPrice}`);
         var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  ${tickerCurrentPrice}`);
-        var tickerIconEl = <i class="fas fa-arrow-down"></i>;
-        if (tickerOpeningPrice < tickerCurrentPrice) {
-            tickerIconEl = <i class="fas fa-arrow-up"></i>;
-        }
-        tickerIconEl.attr("style", "height: 40px; width: 40px");
+        // var tickerIconEl = <i class="fas fa-arrow-down"></i>;
+        // if (tickerOpeningPrice < tickerCurrentPrice) {
+        //     tickerIconEl = <i class="fas fa-arrow-up"></i>;
+        // }
+        // tickerIconEl.attr("style", "height: 40px; width: 40px");
 
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);
