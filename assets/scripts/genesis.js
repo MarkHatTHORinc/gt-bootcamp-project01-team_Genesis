@@ -3,10 +3,15 @@ var tickerApiKey = "YYY";
 var favoritesArray = [];
 
 // Delete ticker symbol from local storage and favoritesArray
-// Mark H
+// Mark H - completed
 function deleteFavorite(stockTicker) {
     // Remove from Array
-    // ..... need code here
+    // 1. Find the stock ticker in the array
+    var index = favoritesArray.indexOf(stockTicker);
+    // 2. If found remove it from the array
+    if (index !== -1) {
+        favoritesArray.splice(index, 0);
+    }
     // Sort the favorite ticker symbols so they are alphabetical
     favoritsArray.sort();
     // Store to local storage
@@ -180,7 +185,7 @@ function buildNews(data) {
 }
 
 // Listen for the search button to be clicked
-// Mark H
+// Mark H - completed
 $("#searchTicker").on("click", function (event) {
     // Preventing the button from trying to submit the form......
     event.preventDefault();
@@ -189,8 +194,8 @@ $("#searchTicker").on("click", function (event) {
 
     //Verify a ticker symbol was entered
     if (tickerInput === "" || tickerInput == "undefined") {
-        // We need something besides an alert here
-        // alert("Please enter a ticker symbol.")
+        // Put a message of invalid input in the input box
+        tickerInput.value = `${tickerInput} is not a valid symbol.`;
     } else {
         // Get the ticker info
         getTickerInfo(tickerInput);
@@ -198,18 +203,19 @@ $("#searchTicker").on("click", function (event) {
 });
 
 // Listen for one of the favorites to be clicked
-// Mark H
+// Mark H - completed
 $("#favorites").on('click', '.btn', function (event) {
     event.preventDefault();
     // Need to check and see if they clicked on Delete, News, or Info buttons
-    var action = $(this).datasrc("action");
+    let action = event.target.dataset.action;
+    let stockTicker = event.dataset.ticker;
     if (action = "delete") {
-        deleteFavorite($(this).text());
+        deleteFavorite(stockTicker);
         getFavoritesInfo();
     } else if (action = "news") {
-        getNews($(this).text);
+        getNews(stockTicker);
     } else if (action = "info") {
-        buildTickerInfo($(this).text);
+        getTickerInfo(stockTicker);
     }
 
 });
