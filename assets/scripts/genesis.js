@@ -1,6 +1,7 @@
-var newsApiKey = "XXX";
-var tickerApiKey = "YYY";
+var newsApiKey = "2a4cf3a31d9040d5b3ffac344cc44dff"; //David added newsApiKey
+var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
+const topStories = "TOP STORIES";
 
 // Delete ticker symbol from local storage and favoritesArray
 // Mark H - completed
@@ -10,10 +11,10 @@ function deleteFavorite(stockTicker) {
     var index = favoritesArray.indexOf(stockTicker);
     // 2. If found remove it from the array
     if (index !== -1) {
-        favoritesArray.splice(index, 0);
+        favoritesArray.splice(index, 1);
     }
     // Sort the favorite ticker symbols so they are alphabetical
-    favoritsArray.sort();
+    favoritesArray.sort();
     // Store to local storage
     localStorage.removeItem("favoriteStocks");
     localStorage.setItem("favoriteStocks", JSON.stringify(favoritesArray));
@@ -21,15 +22,16 @@ function deleteFavorite(stockTicker) {
 }
 
 // Save ticker symbol to local storage
-// David Figueroa
+// Mark H -- completed
 function saveTicker(stockTicker) {
     // Only store the stock ticker if it hasn't been previously stored
+    stockTicker = stockTicker.toUpperCase();
     if (!favoritesArray ||
         favoritesArray.length === 0 ||
         !favoritesArray.includes(stockTicker)) {
         favoritesArray.push(stockTicker);
         // Sort the favorite ticker symbols so they are alphabetical
-        favoritsArray.sort();
+        favoritesArray.sort();
         // Store to local storage
         localStorage.removeItem("favoriteStocks");
         localStorage.setItem("favoriteStocks", JSON.stringify(favoritesArray));
@@ -66,12 +68,12 @@ function getNews(stockTicker) {
 // Get Favorites Info
 // Justin Byrd
 function getFavoritesInfo() {
-    var storedFavorites = JSON.parse(localStorage.getItem("favoriteStocks"));
-    if (storedFavorites) {
-        favoritesArray = storedFavorites;
+    favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
+    if (favoritesArray.length == 0) {
+        //nothing to build
+        return;
     }
-    // need to add each element of the favorites array to the URL below....
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/complex_data?apikey=${tickerApiKey}`);
+    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
 
     fetch(stockApiUrl, {
         method: 'GET', //GET is the default.
@@ -149,21 +151,21 @@ function buildFavorites(data) {
         var tickerCurrentPrice = ticker.currentPrice;
 
         // Creating tags with the result items
-        // var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
-        // var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  ${tickerOpeningPrice}`);
-        // var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  ${tickerCurrentPrice}`);
+        var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
+        var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  ${tickerOpeningPrice}`);
+        var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  ${tickerCurrentPrice}`);
         // var tickerIconEl = <i class="fas fa-arrow-down"></i>;
         // if (tickerOpeningPrice < tickerCurrentPrice) {
         //     tickerIconEl = <i class="fas fa-arrow-up"></i>;
         // }
         // tickerIconEl.attr("style", "height: 40px; width: 40px");
 
-        // // Append elements to forecastEl
-        // tickerEl.append(tickerSymbolEl);
-        // tickerEl.append(tickerOpeningPriceEl);
-        // tickerEl.append(tickerCurrentPriceEl);
-        // tickerEl.append(tickerIconEl);
-        // $("#favorites").append(tickerEl);
+        // Append elements to forecastEl
+        tickerEl.append(tickerSymbolEl);
+        tickerEl.append(tickerOpeningPriceEl);
+        tickerEl.append(tickerCurrentPriceEl);
+        tickerEl.append(tickerIconEl);
+        $("#favorites").append(tickerEl);
     })
     return;
 }
