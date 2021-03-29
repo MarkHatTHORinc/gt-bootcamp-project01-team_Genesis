@@ -1,4 +1,4 @@
-var newsApiKey = "XXX";
+var newsApiKey = "2a4cf3a31d9040d5b3ffac344cc44dff";
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
 
