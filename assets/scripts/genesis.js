@@ -1,6 +1,7 @@
-var newsApiKey = "XXX";
+var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
+const topStories = "TOP STORIES";
 
 // Delete ticker symbol from local storage and favoritesArray
 // Mark H - completed
@@ -10,10 +11,10 @@ function deleteFavorite(stockTicker) {
     var index = favoritesArray.indexOf(stockTicker);
     // 2. If found remove it from the array
     if (index !== -1) {
-        favoritesArray.splice(index, 0);
+        favoritesArray.splice(index, 1);
     }
     // Sort the favorite ticker symbols so they are alphabetical
-    favoritsArray.sort();
+    favoritesArray.sort();
     // Store to local storage
     localStorage.removeItem("favoriteStocks");
     localStorage.setItem("favoriteStocks", JSON.stringify(favoritesArray));
@@ -21,15 +22,16 @@ function deleteFavorite(stockTicker) {
 }
 
 // Save ticker symbol to local storage
-// David Figueroa
+// Mark H -- completed
 function saveTicker(stockTicker) {
     // Only store the stock ticker if it hasn't been previously stored
+    stockTicker = stockTicker.toUpperCase();
     if (!favoritesArray ||
         favoritesArray.length === 0 ||
         !favoritesArray.includes(stockTicker)) {
         favoritesArray.push(stockTicker);
         // Sort the favorite ticker symbols so they are alphabetical
-        favoritsArray.sort();
+        favoritesArray.sort();
         // Store to local storage
         localStorage.removeItem("favoriteStocks");
         localStorage.setItem("favoriteStocks", JSON.stringify(favoritesArray));
@@ -40,7 +42,11 @@ function saveTicker(stockTicker) {
 // Get News Web API Call
 // David Figueroa
 function getNews(stockTicker) {
-    var newsApiUrl = encodeURI(`https://newsapi.org/v2/everything?q=${stockTicker}&from=2021-03-25&sortBy=popularity&apiKey=${newsApiKey}`);
+    var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey}&q=${stockTicker}&topic=business&country=us`);
+    if (stockTicker === topStories ) {
+        newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey}&topic=business&country=us`);
+    }
+
 
     fetch(newsApiUrl, {
         method: 'GET', //GET is the default.
@@ -66,8 +72,8 @@ function getNews(stockTicker) {
 // Get Favorites Info
 // Justin Byrd
 function getFavoritesInfo() {
-    var storedFavorites = JSON.parse(localStorage.getItem("favoriteStocks"));
-    if (storedFavorites.length == 0) {
+    favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
+    if (favoritesArray.length == 0) {
         //nothing to build
         return;
     }
@@ -173,15 +179,30 @@ function buildFavorites(data) {
 // David F
 function buildNews(data) {
     // Clear out any previous news html elements
-    $("#news").empty();
+    $("#container-news").empty();
+    // make sure we have at least three articles
+    var articleCount = data.totalArticles;
+    if (articleCount > 3) {
+        articleCount = 3;
+    }
     // create elements for news
-    var newsEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2'>");
-    // .....
-    // .....
-    // Need to add data to news elements
-    // .....
-    // .....
-    $("#news").append(newsEl);
+    var newsEl = $("<div>");
+    var headLineEl = $("<h4>");
+    var imageEl = $("<img>");
+    var descriptionEl = $("<p>");
+    var newsLinkEl = $("<a>");
+
+    for (var i=0; i < articleCount; i++) {
+        headLineEl.text(data.articles[i].title);
+        newsLinkEl.attr("href", data.articles[i].url);
+        newsLinkEl.append(headLineEl);
+        imageEl.attr("src", data.articles[i].image);
+        imageEl.attr("style", "height: 120px; width: 80px");
+        descriptionEl.text(data.articles[i].description);
+        
+        newsEl.append(newsLinkEl, imageEl, descriptionEl);
+        $("#container-news").append(newsEl);
+    }
     return;
 }
 
@@ -223,3 +244,5 @@ $("#favorites").on('click', '.btn', function (event) {
 
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
+// Get the top news stories on load and build news section
+getNews(topStories);
