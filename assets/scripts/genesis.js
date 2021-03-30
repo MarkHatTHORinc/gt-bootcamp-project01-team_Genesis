@@ -1,6 +1,7 @@
-var newsApiKey = "XXX";
+var newsApiKey = "2a4cf3a31d9040d5b3ffac344cc44dff"; //David added newsApiKey
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
+const topStories = "TOP STORIES";
 
 // Delete ticker symbol from local storage and favoritesArray
 // Mark H - completed
@@ -10,10 +11,10 @@ function deleteFavorite(stockTicker) {
     var index = favoritesArray.indexOf(stockTicker);
     // 2. If found remove it from the array
     if (index !== -1) {
-        favoritesArray.splice(index, 0);
+        favoritesArray.splice(index, 1);
     }
     // Sort the favorite ticker symbols so they are alphabetical
-    favoritsArray.sort();
+    favoritesArray.sort();
     // Store to local storage
     localStorage.removeItem("favoriteStocks");
     localStorage.setItem("favoriteStocks", JSON.stringify(favoritesArray));
@@ -21,15 +22,16 @@ function deleteFavorite(stockTicker) {
 }
 
 // Save ticker symbol to local storage
-// David Figueroa
+// Mark H -- completed
 function saveTicker(stockTicker) {
     // Only store the stock ticker if it hasn't been previously stored
+    stockTicker = stockTicker.toUpperCase();
     if (!favoritesArray ||
         favoritesArray.length === 0 ||
         !favoritesArray.includes(stockTicker)) {
         favoritesArray.push(stockTicker);
         // Sort the favorite ticker symbols so they are alphabetical
-        favoritsArray.sort();
+        favoritesArray.sort();
         // Store to local storage
         localStorage.removeItem("favoriteStocks");
         localStorage.setItem("favoriteStocks", JSON.stringify(favoritesArray));
@@ -66,8 +68,8 @@ function getNews(stockTicker) {
 // Get Favorites Info
 // Justin Byrd
 function getFavoritesInfo() {
-    var storedFavorites = JSON.parse(localStorage.getItem("favoriteStocks"));
-    if (storedFavorites.length == 0) {
+    favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
+    if (favoritesArray.length == 0) {
         //nothing to build
         return;
     }
