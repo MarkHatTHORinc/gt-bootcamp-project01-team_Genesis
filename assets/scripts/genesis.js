@@ -1,4 +1,5 @@
-var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";
+// var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
+var newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
 const topStories = "TOP STORIES";
@@ -72,19 +73,13 @@ function getNews(stockTicker) {
 // Get Favorites Info
 // Justin Byrd
 function getFavoritesInfo() {
-    favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
     if (favoritesArray.length == 0) {
         //nothing to build
         return;
     }
     var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
 
-    fetch(stockApiUrl, {
-        method: 'GET', //GET is the default.
-        credentials: 'same-origin', // include, *same-origin, omit
-        redirect: 'follow', // manual, *follow, error
-        cache: 'reload'  // Refresh the cache
-    })
+    fetch(stockApiUrl)
         .then(response => {
             return response.json();
         })
@@ -145,32 +140,38 @@ function buildFavorites(data) {
     $("#favorites").empty();
     // create elements for favorites
     // start index at 1 because 0 is current day
-    data.forEach(ticker => {
+    Object.values(data).forEach(ticker => {
         // Creating ticker div
         var tickerEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
-
         // Extract values to be displayed
-        var tickerSymbol = ticker.symbol;
-        var tickerOpeningPrice = ticker.openingPrice;
-        var tickerCurrentPrice = ticker.currentPrice;
+        var tickerSymbol = ticker.meta.symbol;
+        var tickerOpeningPrice = parseFloat(ticker.values[0].open)
+        var tickerCurrentPrice = parseFloat(ticker.values[0].close)
+        var percentChange = (tickerCurrentPrice/tickerOpeningPrice) * 100;
+
+        var tickerOpeningPrice = parseFloat(ticker.values[0].open).toFixed(2);
+        var tickerCurrentPrice = parseFloat(ticker.values[0].close).toFixed(2);
 
         // Creating tags with the result items
         var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
-        var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  ${tickerOpeningPrice}`);
-        var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  ${tickerCurrentPrice}`);
-        // var tickerIconEl = <i class="fas fa-arrow-down"></i>;
-        // if (tickerOpeningPrice < tickerCurrentPrice) {
-        //     tickerIconEl = <i class="fas fa-arrow-up"></i>;
-        // }
-        // tickerIconEl.attr("style", "height: 40px; width: 40px");
+        var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  $${tickerOpeningPrice}`);
+        var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
+        var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}&#37;`);
+        
+        if (tickerOpeningPrice < tickerCurrentPrice)
+            var tickerIconEl = $('<img class="fas fa-arrow-down">');
+        else
+            tickerIconEl = $('<img class="fas fa-arrow-up">');
+        tickerIconEl.attr("style", "height: 40px; width: 40px");
 
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);
         tickerEl.append(tickerOpeningPriceEl);
         tickerEl.append(tickerCurrentPriceEl);
+        tickerEl.append(tickerPercentChangeEl);
         tickerEl.append(tickerIconEl);
         $("#favorites").append(tickerEl);
-    })
+    });
     return;
 }
 
