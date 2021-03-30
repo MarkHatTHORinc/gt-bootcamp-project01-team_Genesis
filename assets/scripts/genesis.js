@@ -72,12 +72,11 @@ function getNews(stockTicker) {
 // Get Favorites Info
 // Justin Byrd
 function getFavoritesInfo() {
-    favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
     if (favoritesArray.length == 0) {
         //nothing to build
         return;
     }
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${storedFavorites.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
+    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
 
     fetch(stockApiUrl)
         .then(response => {
