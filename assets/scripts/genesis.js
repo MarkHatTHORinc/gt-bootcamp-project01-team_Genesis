@@ -1,4 +1,5 @@
-var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";
+// var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
+var newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
 const topStories = "TOP STORIES";
@@ -197,7 +198,7 @@ function buildNews(data) {
         newsLinkEl.append(headLineEl);
         imageEl.attr("src", data.articles[i].image);
         imageEl.attr("style", "height: 120px; width: 80px");
-        descriptionEl.text(data.articles[i].description);
+        descriptionEl.text(data.articles[i].content);
         
         newsEl.append(newsLinkEl, imageEl, descriptionEl);
         $("#container-news").append(newsEl);
