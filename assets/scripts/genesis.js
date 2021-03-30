@@ -1,4 +1,4 @@
-var newsApiKey = "2a4cf3a31d9040d5b3ffac344cc44dff"; //David added newsApiKey
+var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
 const topStories = "TOP STORIES";
@@ -42,7 +42,11 @@ function saveTicker(stockTicker) {
 // Get News Web API Call
 // David Figueroa
 function getNews(stockTicker) {
-    var newsApiUrl = encodeURI(`https://newsapi.org/v2/everything?q=${stockTicker}&from=2021-03-25&sortBy=popularity&apiKey=${newsApiKey}`);
+    var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey}&q=${stockTicker}&topic=business&country=us`);
+    if (stockTicker === topStories ) {
+        newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey}&topic=business&country=us`);
+    }
+
 
     fetch(newsApiUrl, {
         method: 'GET', //GET is the default.
@@ -174,15 +178,30 @@ function buildFavorites(data) {
 // David F
 function buildNews(data) {
     // Clear out any previous news html elements
-    $("#news").empty();
+    $("#container-news").empty();
+    // make sure we have at least three articles
+    var articleCount = data.totalArticles;
+    if (articleCount > 3) {
+        articleCount = 3;
+    }
     // create elements for news
-    var newsEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2'>");
-    // .....
-    // .....
-    // Need to add data to news elements
-    // .....
-    // .....
-    $("#news").append(newsEl);
+    var newsEl = $("<div>");
+    var headLineEl = $("<h4>");
+    var imageEl = $("<img>");
+    var descriptionEl = $("<p>");
+    var newsLinkEl = $("<a>");
+
+    for (var i=0; i < articleCount; i++) {
+        headLineEl.text(data.articles[i].title);
+        newsLinkEl.attr("href", data.articles[i].url);
+        newsLinkEl.append(headLineEl);
+        imageEl.attr("src", data.articles[i].image);
+        imageEl.attr("style", "height: 120px; width: 80px");
+        descriptionEl.text(data.articles[i].description);
+        
+        newsEl.append(newsLinkEl, imageEl, descriptionEl);
+        $("#container-news").append(newsEl);
+    }
     return;
 }
 
@@ -224,3 +243,5 @@ $("#favorites").on('click', '.btn', function (event) {
 
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
+// Get the top news stories on load and build news section
+getNews(topStories);
