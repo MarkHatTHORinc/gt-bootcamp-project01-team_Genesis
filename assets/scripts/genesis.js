@@ -218,6 +218,7 @@ $("#searchTicker").on("click", function (event) {
     if (tickerInput === "" || tickerInput == "undefined") {
         // Put a message of invalid input in the input box
         tickerInput.value = `${tickerInput} is not a valid symbol.`;
+        displayModal();
     } else {
         // Get the ticker info
         getTickerInfo(tickerInput);
@@ -243,7 +244,7 @@ $("#favorites").on('click', '.btn', function (event) {
 });
 
 // Load favorites array from local storage
-favoritesArray = localStorage.getItem("favoriteStocks", JSON.stringify(favoritesArray));
+favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
