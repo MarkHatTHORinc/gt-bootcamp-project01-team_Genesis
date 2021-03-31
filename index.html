@@ -5,7 +5,7 @@
         <title>Genesis Stock-Watcher</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="assets/style.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
     </head>
         <img src="assets/images/Wall.jpeg" id="bg" alt="">
@@ -23,13 +23,15 @@
             <div id ="ticker-container" class = container>
                 <br>
                 <div class="input-group mb-3">
-                    <input id ="tickerInput" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input id ="tickerInput" type="text" class="form-control" placeholder="Enter Search Ticker" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-success" type="button" id="searchTicker">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search " viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                           </svg>
                     </button>
-                </div  id="tickerInfo" class= "container" >
+                </div>    
+                <div id="tickerInfo" class= "container">
+                    <!-- <div class = "bgcolor"> -->
                     <p>
                        <h1 id="ticker-name">Name:</h1> 
                     </p>
@@ -48,11 +50,13 @@
                     <p>
                         Datetime:
                     </p>
+                    </div>
                 </div>
-            </div>
+             </div>
+            
               
-            <div id="favorites" class="container">
-                <h4>FAVORITES:</h4>
+            <div id="favorites" class="container flex-row"> 
+                <!-- <div><h4>FAVORITES:</h4></div> -->
                 <div id="fav1" class="row">
                     <p>Current:</p>
                     <br>
@@ -185,7 +189,7 @@
                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                   </svg>
                             </button>
-                          </div>
+                        </div>
                     </div>
                 </div>
                 <div id="fav6" class="row">
