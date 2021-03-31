@@ -198,7 +198,7 @@ function buildNews(data) {
         newsLinkEl.append(headLineEl);
         imageEl.attr("src", data.articles[i].image);
         imageEl.attr("style", "height: 120px; width: 80px");
-        descriptionEl.text(data.articles[i].description);
+        descriptionEl.text(data.articles[i].content);
         
         newsEl.append(newsLinkEl, imageEl, descriptionEl);
         $("#container-news").append(newsEl);
@@ -242,6 +242,8 @@ $("#favorites").on('click', '.btn', function (event) {
 
 });
 
+// Load favorites array from local storage
+localStorage.getItem("favoriteStocks", JSON.stringify(favoritesArray));
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
