@@ -1,3 +1,4 @@
+var debug = "false";
 // var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
 var newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
@@ -43,9 +44,13 @@ function saveTicker(stockTicker) {
 // Get News Web API Call
 // David Figueroa
 function getNews(stockTicker) {
-    var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey}&q=${stockTicker}&topic=business&country=us`);
-    if (stockTicker === topStories ) {
-        newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey}&topic=business&country=us`);
+    if (debug === "false") {
+        var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey}&q=${stockTicker}&topic=business&country=us`);
+        if (stockTicker === topStories) {
+            newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey}&topic=business&country=us`);
+        }
+    } else {
+        var newsApiUrl = "./assets/testData/gnews.JSON"
     }
 
 
@@ -180,21 +185,22 @@ function buildNews(data) {
     if (articleCount > 3) {
         articleCount = 3;
     }
-    // create elements for news
+
+
+    for (var i = 0; i < articleCount; i++) {
+            // create elements for news
     var newsEl = $("<div>");
     var headLineEl = $("<h4>");
     var imageEl = $("<img>");
     var descriptionEl = $("<p>");
     var newsLinkEl = $("<a>");
-
-    for (var i=0; i < articleCount; i++) {
         headLineEl.text(data.articles[i].title);
         newsLinkEl.attr("href", data.articles[i].url);
         newsLinkEl.append(headLineEl);
         imageEl.attr("src", data.articles[i].image);
         imageEl.attr("style", "height: 120px; width: 80px");
         descriptionEl.text(data.articles[i].content);
-        
+
         newsEl.append(newsLinkEl, imageEl, descriptionEl);
         $("#container-news").append(newsEl);
     }
@@ -207,13 +213,13 @@ function displayModal(message) {
     var modalMessage = $("#modalMessage");
     modalMessage.text(message);
     modal.modal('show');
-
+    return;
 }
 
 // When the user clicks on <span> (x), close the modal
 $("#closeModal").on("click", function (event) {
     modal.style.display = "none";
-  });
+});
 
 // Listen for the search button to be clicked
 // Mark H - completed
@@ -252,9 +258,14 @@ $("#favorites").on('click', '.btn', function (event) {
 
 });
 
+// See if we are in debug mode - make debug=false the default
+debug = localStorage.getItem("debug");
+if (debug !== "true") {
+    debug = "false";
+}
 // Load favorites array from local storage
 favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
-// getNews(topStories);
+getNews(topStories);
