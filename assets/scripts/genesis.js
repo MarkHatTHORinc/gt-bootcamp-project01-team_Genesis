@@ -244,7 +244,7 @@ $("#favorites").on('click', '.btn', function (event) {
 });
 
 // Load favorites array from local storage
-favoritesArray = JSON. parse(localStorage.getItem("favoriteStocks"));
+favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
