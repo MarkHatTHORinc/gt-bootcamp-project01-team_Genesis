@@ -115,7 +115,7 @@ function getTickerInfo(tickerName) {
             // Build the Ticker Section
             buildTickerInfo(data);
             // Get the news for this ticker symbol
-            getNews(tickerName);
+            // getNews(tickerName);
         });
     return;
 }
@@ -124,16 +124,15 @@ function getTickerInfo(tickerName) {
 // Justin B
 function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
-    $("#tickerInfo").empty();
+    var tickerDivEl = $("#ticker-container");
 
     // Create Elements for ticker information
-    // .....
-    // .....    
+    var symbolHeadingEl = $('<h2>').text = data.meta.symbol.toUpperCase();
 
     // Create HTML div to append new elements to render on page....
     var tickerInfoEl = $('<div>');
-    tickerInfoEl.append(elementsAbove);
-    $("#tickerInfo").html(tickerInfoEl);
+    tickerInfoEl.append(sybolHeadingEl);
+    tickerDivEl.append(tickerInfoEl);
 
     return;
 }
@@ -268,4 +267,4 @@ favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
-getNews(topStories);
+// getNews(topStories);
