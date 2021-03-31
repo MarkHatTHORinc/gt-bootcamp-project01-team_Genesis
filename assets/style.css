@@ -88,8 +88,14 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     left: 185px;
     flex-direction: row;
     display: flex;
+    flex-wrap: wrap;
 }
-
+#favbutton{
+    width: 80px;
+    position: relative;
+    top: 10px;
+    left:250px
+}
 
 
 h4{
@@ -102,7 +108,7 @@ h4{
     position: relative;
     border-style: solid;
     border-width: 1px;
-    width: 325px;
+    width: 125px;
     height: 150px;
     left: 15px;
     top: 10px;
@@ -113,10 +119,8 @@ h4{
     position: relative;
     border-style: solid;
     border-width: 1px;
-    width: 325px;
+    width: 125px;
     height: 150px;
-    top: 200px;
-    right: 85px;
     background-color: rgb(138, 172, 232);
     
 }
@@ -125,9 +129,10 @@ h4{
     position: relative;
     border-style: solid;
     border-width: 1px;
-    width: 325px;
+    width: 125px;
     height: 150px;
     top: 10px;
+    left: 120px;
     background-color:rgb(138, 172, 232);
 }
 
@@ -135,12 +140,9 @@ h4{
     position: relative;
     border-style:solid;
     border-width: 1px;
-    width: 325px;
+    width: 125px;
     height: 150px;
     top: 200px;
-    right: 100px;
-    
-   
     background-color: rgb(138, 172, 232);
 }
 
@@ -148,10 +150,10 @@ h4{
     position: relative;
     border-style: solid;
     border-width: 1px;
-    width: 325px;
+    width: 125px;
     height:150px;
     top: 10px;
-
+    left: 100px;
     background-color: rgb(138, 172, 232);  
 }
 
@@ -159,10 +161,10 @@ h4{
     position: relative;
     border-style: solid;
     border-width: 1px;
-    width: 325px;
+    width: 125px;
     height:150px;
     top: 200px;
-    right: 100px;
+    right: 20px;
     background-color:rgb(138, 172, 232);
 }
 
@@ -222,13 +224,55 @@ div .bgcolor p{
     background-color: whitesmoke;
     opacity: 85%;
     width: 1000px;
-} 
-/* Styling for cards from API Favorites */
-div .favcards {
-    width: 10.5rem;
-    height: 12rem;
+    transition-property:all;
+    transition-duration: 1s;
+    transition-delay: 0s;
 }
 
+#container-news h4{
+    position: relative;
+    top: 100px;
+    font-size: 66px;
+
+}
+#container-news:hover{
+    background-color:  rgb(138, 172, 232);
+    transition: 1ms;
+}
+
+
+
+/* Styling for cards from API Favorites */
 body .card-text{
     font-size: 0.8rem;
+
+}
+
+
+/* Styling for Modal */
+
+.modal-title{
+    font-family:monospace;
+    position: relative;
+    left: 50px;
+    font-size: 45px;
+    color: whitesmoke;
+    font-weight: bolder;
+}
+
+.modal-body{
+    background-color: rgb(224, 57, 57);
+}
+
+#modalMessage{
+    font-style:italic;
+    font-weight: normal;
+    position: relative;
+    left: 100px;
+    color: white;
+    font-family:monospace;
+    font-size: 20px;
+}
+div.modal-content{
+    background-color: rgb(224, 57, 57);
 }
