@@ -55,6 +55,10 @@
 font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+/* DAVID added */
+.container h5{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
 
 #favorites{
     border-style: solid;
@@ -72,6 +76,7 @@ h4{
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
 
 
 #fav1{

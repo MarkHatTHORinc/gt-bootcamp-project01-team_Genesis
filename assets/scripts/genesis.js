@@ -1,5 +1,5 @@
-// var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
-var newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
+var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
+// var newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
 var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 var favoritesArray = [];
 const topStories = "TOP STORIES";
@@ -187,21 +187,21 @@ function buildNews(data) {
     }
     // create elements for news
     var newsEl = $("<div>");
-    var headLineEl = $("<h4>");
-    var sourceEl = $("<p>");
-    var descriptionEl = $("<p>");
+    var headLineEl = $("<h5>");
+    var sourceEl = $("<b>");
+    var descriptionEl = $("<i>");
     var newsLinkEl = $("<a>");
 
     for (var i=0; i < articleCount; i++) {
         headLineEl.text(data.articles[i].title);
         newsLinkEl.attr("href", data.articles[i].url);
         newsLinkEl.append(headLineEl);
-        sourceEl.text(data.articles[i].source.name);
+        sourceEl.text(`Source: ${data.articles[i].source.name}`);
         // sourceEl.attr("src", data.articles[i].source.name);
         // sourceEl.attr("style", "height: 120px; width: 80px");
-        descriptionEl.text(data.articles[i].content);
+        descriptionEl.text(`    ${data.articles[i].content}`);
         
-        newsEl.append(newsLinkEl, sourceEl, descriptionEl);
+        newsEl.append(newsEl, newsLinkEl, sourceEl, descriptionEl);
         $("#container-news").append(newsEl);
     }
     return;
