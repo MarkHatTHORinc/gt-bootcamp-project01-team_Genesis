@@ -139,18 +139,20 @@ function buildFavorites(data) {
     // Clear out any previous favorites html elements
     $("#favorites").empty();
     // create elements for favorites
-    // start index at 1 because 0 is current day
     Object.values(data).forEach(ticker => {
         // Creating ticker div
         var tickerEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
+        
         // Extract values to be displayed
         var tickerSymbol = ticker.meta.symbol;
-        var tickerOpeningPrice = parseFloat(ticker.values[0].open)
-        var tickerCurrentPrice = parseFloat(ticker.values[0].close)
-        var percentChange = (tickerCurrentPrice/tickerOpeningPrice) * 100;
+        var tickerOpeningPrice = parseFloat(ticker.values[0].open);
+        var tickerCurrentPrice = parseFloat(ticker.values[0].close);
+        percentChange = (tickerCurrentPrice/tickerOpeningPrice) * 100 - 100;
 
-        var tickerOpeningPrice = parseFloat(ticker.values[0].open).toFixed(2);
-        var tickerCurrentPrice = parseFloat(ticker.values[0].close).toFixed(2);
+        // Set decimal places
+        tickerOpeningPrice = tickerOpeningPrice.toFixed(2);
+        tickerCurrentPrice = tickerCurrentPrice.toFixed(2);
+        percentChange = percentChange.toFixed(2);
 
         // Creating tags with the result items
         var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
