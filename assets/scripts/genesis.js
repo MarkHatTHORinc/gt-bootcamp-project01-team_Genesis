@@ -97,7 +97,7 @@ function getFavoritesInfo() {
 // Get Ticker Info for left hand side
 // Justin B
 function getTickerInfo(tickerName) {
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/complex_data?apikey=${tickerApiKey}`);
+    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${tickerName}&interval=1day&outputsize=365&apikey=${tickerApiKey}`);
     fetch(stockApiUrl, {
         method: 'GET', //GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
@@ -158,7 +158,7 @@ function buildFavorites(data) {
         var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
         var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  $${tickerOpeningPrice}`);
         var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
-        var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}&#37;`);
+        var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}%`);
         
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);
