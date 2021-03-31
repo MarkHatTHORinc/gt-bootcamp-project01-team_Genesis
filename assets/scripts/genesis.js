@@ -108,16 +108,16 @@ function getTickerInfo(tickerName) {
         })
         .then(function (data) {
             // Build the Ticker Section
-            buildTickerInfo(tickerName, data);
+            buildTickerInfo(data);
             // Get the news for this ticker symbol
-            getNews(data);
+            getNews(tickerName);
         });
     return;
 }
 
 // Build the ticker info section
 // Justin B
-function buildTickerInfo(tickerName, data) {
+function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
     $("#tickerInfo").empty();
 
