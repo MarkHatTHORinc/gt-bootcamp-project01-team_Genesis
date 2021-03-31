@@ -146,8 +146,7 @@ function buildFavorites(data) {
     // create elements for favorites
     Object.values(data).forEach(ticker => {
         // Creating ticker div
-        var tickerEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
-        
+        var tickerEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 10.5rem; height: 12rem;'>");
         // Extract values to be displayed
         var tickerSymbol = ticker.meta.symbol;
         var tickerOpeningPrice = parseFloat(ticker.values[0].open);
