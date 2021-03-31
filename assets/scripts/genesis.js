@@ -206,6 +206,20 @@ function buildNews(data) {
     return;
 }
 
+// Display modal for bad ticker symbol entered
+function displayModal(message) {
+    var modal = $("#modalWindow");
+    var modalMessage = $("#modalMessage");
+    modalMessage.text(message);
+    modal.modal('show');
+
+}
+
+// When the user clicks on <span> (x), close the modal
+$("#closeModal").on("click", function (event) {
+    modal.style.display = "none";
+  });
+
 // Listen for the search button to be clicked
 // Mark H - completed
 $("#searchTicker").on("click", function (event) {
@@ -217,8 +231,8 @@ $("#searchTicker").on("click", function (event) {
     //Verify a ticker symbol was entered
     if (tickerInput === "" || tickerInput == "undefined") {
         // Put a message of invalid input in the input box
-        tickerInput.value = `${tickerInput} is not a valid symbol.`;
-        displayModal();
+        tickerInput.value = `Enter a valid symbol.`;
+        displayModal("Enter a valid symbol.");
     } else {
         // Get the ticker info
         getTickerInfo(tickerInput);
@@ -248,4 +262,4 @@ favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
-getNews(topStories);
+// getNews(topStories);
