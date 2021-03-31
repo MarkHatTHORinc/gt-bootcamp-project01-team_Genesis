@@ -185,7 +185,7 @@ function buildNews(data) {
         articleCount = 3;
     }
 
-
+// trying to add again
     for (var i = 0; i < articleCount; i++) {
             // create elements for news
     var newsEl = $("<div>");
