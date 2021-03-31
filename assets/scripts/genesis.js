@@ -102,7 +102,7 @@ function getFavoritesInfo() {
 // Get Ticker Info for left hand side
 // Justin B
 function getTickerInfo(tickerName) {
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${tickerName}&interval=1day&outputsize=365&apikey=${tickerApiKey}`);
+    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${tickerName}&interval=1day&outputsize=100&apikey=${tickerApiKey}`);
     fetch(stockApiUrl, {
         method: 'GET', //GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
