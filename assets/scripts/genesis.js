@@ -189,18 +189,19 @@ function buildNews(data) {
     for (var i = 0; i < articleCount; i++) {
             // create elements for news
     var newsEl = $("<div>");
-    var headLineEl = $("<h4>");
-    var imageEl = $("<img>");
-    var descriptionEl = $("<p>");
+    var headLineEl = $("<h5>");
+    var sourceEl = $("<b>");
+    var descriptionEl = $("<i>");
     var newsLinkEl = $("<a>");
         headLineEl.text(data.articles[i].title);
         newsLinkEl.attr("href", data.articles[i].url);
         newsLinkEl.append(headLineEl);
-        imageEl.attr("src", data.articles[i].image);
-        imageEl.attr("style", "height: 120px; width: 80px");
-        descriptionEl.text(data.articles[i].content);
-
-        newsEl.append(newsLinkEl, imageEl, descriptionEl);
+        sourceEl.text(`Source: ${data.articles[i].source.name}`);
+        // sourceEl.attr("src", data.articles[i].source.name);
+        // sourceEl.attr("style", "height: 120px; width: 80px");
+        descriptionEl.text(`    ${data.articles[i].content}`);
+        
+        newsEl.append(newsEl, newsLinkEl, sourceEl, descriptionEl);
         $("#container-news").append(newsEl);
     }
     return;
