@@ -75,6 +75,11 @@ div .bgcolor{
 font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+/* DAVID added */
+.container h5{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
 /* Styling of favorites container */
 #favorites{
     border-style: solid;
