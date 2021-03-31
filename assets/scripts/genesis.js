@@ -127,12 +127,12 @@ function buildTickerInfo(data) {
     var tickerDivEl = $("#ticker-container");
 
     // Create Elements for ticker information
-    var symbolHeadingEl = $('<h2>').text = data.meta.symbol.toUpperCase();
+    var symbolHeadingEl = $('<h2>').text = data.meta.symbol;
 
     // Create HTML div to append new elements to render on page....
     var tickerInfoEl = $('<div>');
-    tickerInfoEl.append(sybolHeadingEl);
-    tickerDivEl.append(tickerInfoEl);
+    // tickerInfoEl.append(sybolHeadingEl);
+    // tickerDivEl.append(tickerInfoEl);
 
     return;
 }
