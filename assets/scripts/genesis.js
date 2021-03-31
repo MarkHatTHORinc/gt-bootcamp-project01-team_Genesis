@@ -102,7 +102,7 @@ function getFavoritesInfo() {
 // Get Ticker Info for left hand side
 // Justin B
 function getTickerInfo(tickerName) {
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/complex_data?apikey=${tickerApiKey}`);
+    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${tickerName}&interval=1day&outputsize=365&apikey=${tickerApiKey}`);
     fetch(stockApiUrl, {
         method: 'GET', //GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
@@ -113,16 +113,16 @@ function getTickerInfo(tickerName) {
         })
         .then(function (data) {
             // Build the Ticker Section
-            buildTickerInfo(tickerName, data);
+            buildTickerInfo(data);
             // Get the news for this ticker symbol
-            getNews(data);
+            getNews(tickerName);
         });
     return;
 }
 
 // Build the ticker info section
 // Justin B
-function buildTickerInfo(tickerName, data) {
+function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
     $("#tickerInfo").empty();
 
@@ -144,37 +144,32 @@ function buildFavorites(data) {
     // Clear out any previous favorites html elements
     $("#favorites").empty();
     // create elements for favorites
-    // start index at 1 because 0 is current day
     Object.values(data).forEach(ticker => {
         // Creating ticker div
         var tickerEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
+        
         // Extract values to be displayed
         var tickerSymbol = ticker.meta.symbol;
-        var tickerOpeningPrice = parseFloat(ticker.values[0].open)
-        var tickerCurrentPrice = parseFloat(ticker.values[0].close)
-        var percentChange = (tickerCurrentPrice / tickerOpeningPrice) * 100;
+        var tickerOpeningPrice = parseFloat(ticker.values[0].open);
+        var tickerCurrentPrice = parseFloat(ticker.values[0].close);
+        percentChange = (tickerCurrentPrice/tickerOpeningPrice) * 100 - 100;
 
-        var tickerOpeningPrice = parseFloat(ticker.values[0].open).toFixed(2);
-        var tickerCurrentPrice = parseFloat(ticker.values[0].close).toFixed(2);
+        // Set decimal places
+        tickerOpeningPrice = tickerOpeningPrice.toFixed(2);
+        tickerCurrentPrice = tickerCurrentPrice.toFixed(2);
+        percentChange = percentChange.toFixed(2);
 
         // Creating tags with the result items
         var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
         var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  $${tickerOpeningPrice}`);
         var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
-        var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}&#37;`);
-
-        if (tickerOpeningPrice < tickerCurrentPrice)
-            var tickerIconEl = $('<img class="fas fa-arrow-down">');
-        else
-            tickerIconEl = $('<img class="fas fa-arrow-up">');
-        tickerIconEl.attr("style", "height: 40px; width: 40px");
-
+        var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}%`);
+        
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);
         tickerEl.append(tickerOpeningPriceEl);
         tickerEl.append(tickerCurrentPriceEl);
         tickerEl.append(tickerPercentChangeEl);
-        tickerEl.append(tickerIconEl);
         $("#favorites").append(tickerEl);
     });
     return;
