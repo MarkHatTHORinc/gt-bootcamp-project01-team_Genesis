@@ -158,18 +158,11 @@ function buildFavorites(data) {
         var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
         var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}&#37;`);
         
-        if (tickerOpeningPrice < tickerCurrentPrice)
-            var tickerIconEl = $('<img class="fas fa-arrow-down">');
-        else
-            tickerIconEl = $('<img class="fas fa-arrow-up">');
-        tickerIconEl.attr("style", "height: 40px; width: 40px");
-
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);
         tickerEl.append(tickerOpeningPriceEl);
         tickerEl.append(tickerCurrentPriceEl);
         tickerEl.append(tickerPercentChangeEl);
-        tickerEl.append(tickerIconEl);
         $("#favorites").append(tickerEl);
     });
     return;
