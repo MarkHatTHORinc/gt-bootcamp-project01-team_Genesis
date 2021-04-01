@@ -158,7 +158,7 @@ function buildTickerInfo(data) {
     var symbolVolume = data.values[0].volume;
 
     // Create Elements for ticker information
-    var symbolHeadingEl = $('<h1>').text(data.meta.symbol);
+    var symbolHeadingEl = $('<span>').text(data.meta.symbol);
     var symbolExchangeEl = $('<p>').text(`Exchange: ${data.meta.exchange}`);
     var symbolOpenEl = $('<p>').text(`Open: ${symbolOpen}`);
     var symbolHighEl = $('<p>').text(`High: ${symbolHigh}`);
@@ -176,6 +176,7 @@ function buildTickerInfo(data) {
 
     // Create HTML div to append new elements to render on page....
     tickerDivEl.append(symbolHeadingEl);
+    tickerDivEl.append(saveToFavBtnEl);
     tickerDivEl.append(symbolExchangeEl);
     tickerDivEl.append(symbolOpenEl);
     tickerDivEl.append(symbolHighEl);
@@ -183,7 +184,7 @@ function buildTickerInfo(data) {
     tickerDivEl.append(symbolCloseEl);
     tickerDivEl.append(percentChangeEl);
     tickerDivEl.append(symbolVolumeEl);
-    tickerDivEl.append(saveToFavBtnEl);
+    
 
     return;
 }
