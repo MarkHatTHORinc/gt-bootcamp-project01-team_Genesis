@@ -1,9 +1,12 @@
-var debug = "false";  // debug=true will cause news api to read local file
+var debugWeather = "false";  // debug=true will cause news api to read local file
+var debugFavorites = "false";  // debug=true will cause news api to read local file
+var debugStock = "false";  // debug=true will cause news api to read local file
 var favoritesArray = [];     // Used to order & display favorite stock tickers
 // const newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
 const newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
+const tickerApiKey = "b84c9659f3944589a5147c448c52a1e3";    // David F
 // const tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";    // Justin B
-const tickerApiKey = "f7965dfc06b54da79a51cf9966e8bcca";    // Mark H
+// const tickerApiKey = "f7965dfc06b54da79a51cf9966e8bcca";    // Mark H
 const topStories = "TOP STORIES";   // Used on page load to get top news stories
 
 // Delete ticker symbol from local storage and favoritesArray
@@ -44,7 +47,7 @@ function saveTicker(stockTicker) {
 // Get News Web API Call
 function getNews(stockTicker) {
     // If not in debug mode make api call for news
-    if (debug === "false") {
+    if (debugWeather === "false") {
         var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey}&q=${stockTicker}&topic=business&country=us`);
         if (stockTicker === topStories) {
             newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey}&topic=business&country=us`);
@@ -87,11 +90,11 @@ function getFavoritesInfo() {
         //nothing to build
         return;
     }
-    // if (debug === "false") {
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
-    // } else {   // If in debug mode use the locally stored file for new
-    //     var newsApiUrl = "./assets/testData/twelve.JSON"
-    // }
+    if (debugFavorites === "false") {
+        var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
+    } else {   // If in debug mode use the locally stored file for new
+        var stockApiUrl = "./assets/testData/twelveFavorites.JSON"
+    }
 
     fetch(stockApiUrl)
         .then(response => {
@@ -108,7 +111,7 @@ function getFavoritesInfo() {
             headLineEl.text("Stock Info is Not Currently Available");
             favoritesEl.append(headLineEl);
             $("#favorites").append(favoritesEl);
-            if (debug === "true") {
+            if (debugFavorites === "true") {
                 console.log(error);
             }
         });
@@ -117,7 +120,15 @@ function getFavoritesInfo() {
 
 // Get Ticker Info for left hand side
 function getTickerInfo(tickerName) {
-    var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${tickerName}&interval=1day&outputsize=100&apikey=${tickerApiKey}`);
+    if (debugStock === "false") {
+        var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${tickerName}&interval=1day&outputsize=100&apikey=${tickerApiKey}`);
+    } else {   // If in debug mode use the locally stored file for new
+        if (tickerName == '1234') {
+            var stockApiUrl = "./assets/testData/twelveBad.JSON"
+        } else {
+            var stockApiUrl = "./assets/testData/twelveHP.JSON";
+        }
+    }
     fetch(stockApiUrl, {
         method: 'GET',              // GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
@@ -132,6 +143,16 @@ function getTickerInfo(tickerName) {
             buildTickerInfo(data);
             // Get the news for this ticker symbol
             getNews(tickerName);
+        })
+        .catch(error => {
+            tickerDivEl.empty();
+            var tickerEl = $("<div>");
+            var headLineEl = $("<h5>");
+            headLineEl.text("Stock Info is Not Currently Available");
+            tickerEl.append(headLineEl);
+            if (debugStock === "true") {
+                console.log(error);
+            }
         });
     return;
 }
@@ -140,7 +161,7 @@ const formatCurrency = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
-  })
+})
 
 // Build the ticker info section
 function buildTickerInfo(data) {
@@ -186,7 +207,7 @@ function buildTickerInfo(data) {
     var symbolLow = parseFloat(data.values[0].low);
     symbolLow = symbolLow.toFixed(2);
     symbolLow = formatCurrency.format(symbolLow);
- 
+
     symbolClose = symbolClose.toFixed(2);
     symbolClose = formatCurrency.format(symbolClose);
 
@@ -225,7 +246,7 @@ function buildTickerInfo(data) {
     tickerDivEl.append(symbolCloseEl);
     tickerDivEl.append(percentChangeEl);
     tickerDivEl.append(symbolVolumeEl);
-    
+
     return;
 }
 
@@ -308,7 +329,7 @@ function buildNews(data) {
         var descriptionEl = $("<i>");
         var newsLinkEl = $("<a>");
         headLineEl.text(data.articles[i].title);
-        newsLinkEl.attr("href",data.articles[i].url);
+        newsLinkEl.attr("href", data.articles[i].url);
         newsLinkEl.attr("target", "_blank");
         newsLinkEl.append(headLineEl);
         sourceEl.text(`Source: ${data.articles[i].source.name}`);
@@ -330,7 +351,7 @@ function displayModal(message) {
 }
 
 // Listen for the favorites button to be clicked, add to favorites
-$("#tickerInfo").on("click", ".btn" , function (event) {
+$("#tickerInfo").on("click", ".btn", function (event) {
     event.preventDefault();
     let stockTicker = event.target.parentElement.parentElement.dataset.ticker;
     saveTicker(stockTicker);
@@ -377,9 +398,17 @@ $("#favorites").on('click', '.btn', function (event) {
 });
 
 // See if we are in debug mode - default: debug=false 
-debug = localStorage.getItem("debug");
-if (debug !== "true") {
-    debug = "false";
+debugWeather = localStorage.getItem("debugWeather");
+if (debugWeather !== "true") {
+    debugWeather = "false";
+}
+debugFavorites = localStorage.getItem("debugFavorites");
+if (debugFavorites !== "true") {
+    debugFavorites = "false";
+}
+debugStock = localStorage.getItem("debugStock");
+if (debugStock !== "true") {
+    debugStock = "false";
 }
 // Load favorites array from local storage
 favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
