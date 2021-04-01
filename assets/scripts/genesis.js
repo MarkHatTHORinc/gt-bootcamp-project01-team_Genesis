@@ -194,11 +194,10 @@ function buildNews(data) {
     var descriptionEl = $("<i>");
     var newsLinkEl = $("<a>");
         headLineEl.text(data.articles[i].title);
-        newsLinkEl.attr("href", data.articles[i].url);
+        newsLinkEl.attr("href",data.articles[i].url);
+        newsLinkEl.attr("target", "_blank");
         newsLinkEl.append(headLineEl);
         sourceEl.text(`Source: ${data.articles[i].source.name}`);
-        // sourceEl.attr("src", data.articles[i].source.name);
-        // sourceEl.attr("style", "height: 120px; width: 80px");
         descriptionEl.text(`    ${data.articles[i].content}`);
         
         newsEl.append(newsEl, newsLinkEl, sourceEl, descriptionEl);
