@@ -57,8 +57,7 @@ font-size: 66px;
 }
 
 div .bgcolor{
-    background-color: none
-    ;
+    background-color: none;
     height: 400px;
     width: 365px;
     position: relative;
@@ -97,6 +96,12 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     left:250px
 }
 
+.green{
+background-color: green;
+}
+.red{
+background-color: rgb(167, 40, 40);
+}
 
 h4{
     text-align: center;
@@ -218,12 +223,13 @@ div .bgcolor p{
 #container-news{
     border-style: solid;
     border-width: 1px;
-    height: 300px;
+    height: 500px;
     bottom: 220px;
+    right: 318px;
     position: relative;
     background-color: whitesmoke;
     opacity: 85%;
-    width: 1000px;
+    width: 425px;
     transition-property:all;
     transition-duration: 1s;
     transition-delay: 0s;
@@ -232,7 +238,10 @@ div .bgcolor p{
 #container-news h4{
     position: relative;
     top: 100px;
-    font-size: 66px;
+    font-size: 36px;
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
 
 }
 #container-news:hover{
