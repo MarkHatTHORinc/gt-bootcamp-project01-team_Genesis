@@ -134,17 +134,32 @@ function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
     var tickerDivEl = $("#tickerInfo");
     tickerDivEl.empty();
+
     var symbolOpen = parseFloat(data.values[0].open);
-    var symbolHigh = parseFloat(data.values[0].high);
-    var symbolLow = parseFloat(data.values[0].low);
     var symbolClose = parseFloat(data.values[0].close);
+
     var percentChange = symbolClose / symbolOpen * 100 - 100;
     percentChange = percentChange.toFixed(2);
+
+    symbolOpen = symbolOpen.toFixed(2);
+    symbolOpen = formatter.format(symbolOpen);
+
+    var symbolHigh = parseFloat(data.values[0].high);
+    symbolHigh = symbolHigh.toFixed(2);
+    symbolHigh = formatter.format(symbolHigh);
+
+    var symbolLow = parseFloat(data.values[0].low);
+    symbolLow = symbolLow.toFixed(2);
+    symbolLow = formatter.format(symbolLow);
+ 
+    symbolClose = symbolClose.toFixed(2);
+    symbolClose = formatter.format(symbolClose);
+
     var symbolVolume = data.values[0].volume;
 
     // Create Elements for ticker information
     var symbolHeadingEl = $('<h1>').text(data.meta.symbol);
-    var symbolExchangeEl = $('<p>').text(data.meta.exchange);
+    var symbolExchangeEl = $('<p>').text(`Exchange: ${data.meta.exchange}`);
     var symbolOpenEl = $('<p>').text(`Open: ${symbolOpen}`);
     var symbolHighEl = $('<p>').text(`High: ${symbolHigh}`);
     var symbolLowEl = $('<p>').text(`Low: ${symbolLow}`);
