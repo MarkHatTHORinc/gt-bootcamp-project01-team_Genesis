@@ -129,22 +129,25 @@ function getTickerInfo(tickerName) {
             var stockApiUrl = "./assets/testData/twelveHP.JSON";
         }
     }
-    fetch(stockApiUrl, {
-        method: 'GET',              // GET is the default.
-        credentials: 'same-origin', // include, *same-origin, omit
-        redirect: 'follow',         // manual, *follow, error
-        cache: 'reload'             // Refresh the cache
-    })
+    fetch(stockApiUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+            if (data.status === 'error') {
+                displayModal("OOPS! The stock symbol was not found.  Please try again.")
+                return;
+            }
+            // Empty search field
+            var symbolSearchBtn = $("#tickerInput");
+            symbolSearchBtn.val("");
             // Build the Ticker Section
             buildTickerInfo(data);
             // Get the news for this ticker symbol
             getNews(tickerName);
         })
         .catch(error => {
+            var tickerDivEl = $("#tickerInfo");
             tickerDivEl.empty();
             var tickerEl = $("<div>");
             var headLineEl = $("<h5>");
@@ -154,7 +157,7 @@ function getTickerInfo(tickerName) {
                 console.log(error);
             }
         });
-    return;
+    // return;
 }
  
 const formatCurrency = new Intl.NumberFormat('en-US', {
@@ -168,7 +171,33 @@ function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
     var tickerDivEl = $("#tickerInfo");
     tickerDivEl.empty();
+<<<<<<< HEAD
  
+=======
+
+    var ticker100DayHigh, ticker100DayLow, ticker30DayHigh, ticker30DayLow, ticker10DayHigh, ticker10DayLow;
+    for (i = 0; i < 100; i++) {
+        if (i < 10) {
+            if (ticker100DayHigh === undefined || data.values[i].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
+            if (ticker100DayLow === undefined || data.values[i].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
+            if (ticker30DayHigh === undefined || data.values[i].high > ticker30DayHigh) ticker30DayHigh = data.values[i].high;
+            if (ticker30DayLow === undefined || data.values[i].low < ticker30DayLow) ticker30DayLow = data.values[i].low;
+            if (ticker10DayHigh === undefined || data.values[i].high > ticker10DayHigh) ticker10DayHigh = data.values[i].high;
+            if (ticker10DayLow === undefined || data.values[i].low < ticker10DayLow) ticker10DayLow = data.values[i].low;
+        }
+        else if (i < 30) {
+            if (ticker100DayHigh === undefined || data.values[i].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
+            if (ticker100DayLow === undefined || data.values[i].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
+            if (ticker30DayHigh === undefined || data.values[i].high > ticker30DayHigh) ticker30DayHigh = data.values[i].high;
+            if (ticker30DayLow === undefined || data.values[i].low < ticker30DayLow) ticker30DayLow = data.values[i].low;
+        }
+        else {
+            if (ticker100DayHigh === undefined || data.values[i].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
+            if (ticker100DayLow === undefined || data.values[i].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
+        }
+    }
+
+>>>>>>> 7350f5fabceb269e5b6da5ae4a5ceeec1749057a
     var symbolOpen = parseFloat(data.values[0].open);
     var symbolClose = parseFloat(data.values[0].close);
  
