@@ -138,6 +138,9 @@ function getTickerInfo(tickerName) {
                 displayModal("OOPS! The stock symbol was not found.  Please try again.")
                 return;
             }
+            // Empty search field
+            var symbolSearchBtn = $("#tickerInput");
+            symbolSearchBtn.val("");
             // Build the Ticker Section
             buildTickerInfo(data);
             // Get the news for this ticker symbol
