@@ -123,7 +123,11 @@ function getTickerInfo(tickerName) {
     return;
 }
 
-
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  })
 
 // Build the ticker info section
 function buildTickerInfo(data) {
