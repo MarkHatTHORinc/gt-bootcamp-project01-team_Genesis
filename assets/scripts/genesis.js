@@ -35,6 +35,7 @@ function saveTicker(stockTicker) {
         // Store to local storage
         localStorage.removeItem("favoriteStocks");
         localStorage.setItem("favoriteStocks", JSON.stringify(favoritesArray));
+        getFavoritesInfo();
     }
     return;
 }
