@@ -158,7 +158,7 @@ function buildTickerInfo(data) {
     var symbolVolume = data.values[0].volume;
 
     // Create Elements for ticker information
-    var symbolHeadingEl = $('<h1>').text(data.meta.symbol);
+    var symbolHeadingEl = $('<span>').text(data.meta.symbol);
     var symbolExchangeEl = $('<p>').text(`Exchange: ${data.meta.exchange}`);
     var symbolOpenEl = $('<p>').text(`Open: ${symbolOpen}`);
     var symbolHighEl = $('<p>').text(`High: ${symbolHigh}`);
@@ -168,7 +168,7 @@ function buildTickerInfo(data) {
     var symbolVolumeEl = $('<p>').text(`Volume: ${symbolVolume}`);
 
     // Add to favorites button
-    var saveToFavBtnEl = `<button class="btn btn-warning" type="button" id="favbutton" data-ticker="${data.meta.symbol}">
+    var saveToFavBtnEl = `<button class="btn btn-warning" type="button" id="btnAddFavorite" data-ticker="${data.meta.symbol}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                             </svg>
@@ -176,6 +176,7 @@ function buildTickerInfo(data) {
 
     // Create HTML div to append new elements to render on page....
     tickerDivEl.append(symbolHeadingEl);
+    tickerDivEl.append(saveToFavBtnEl);
     tickerDivEl.append(symbolExchangeEl);
     tickerDivEl.append(symbolOpenEl);
     tickerDivEl.append(symbolHighEl);
@@ -183,7 +184,7 @@ function buildTickerInfo(data) {
     tickerDivEl.append(symbolCloseEl);
     tickerDivEl.append(percentChangeEl);
     tickerDivEl.append(symbolVolumeEl);
-    tickerDivEl.append(saveToFavBtnEl);
+    
 
     return;
 }
