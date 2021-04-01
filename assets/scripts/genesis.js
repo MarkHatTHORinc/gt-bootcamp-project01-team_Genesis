@@ -173,22 +173,22 @@ function buildTickerInfo(data) {
     var ticker100DayHigh, ticker100DayLow, ticker30DayHigh, ticker30DayLow, ticker10DayHigh, ticker10DayLow;
     for (i = 0; i < 100; i++) {
         if (i < 10) {
-            if (ticker100DayHigh === undefined  || data.values[0].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
-            if (ticker100DayLow === undefined  || data.values[0].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
-            if (ticker30DayHigh === undefined  || data.values[0].high > ticker30DayHigh) ticker30DayHigh = data.values[i].high;
-            if (ticker30DayLow === undefined  || data.values[0].low < ticker30DayLow) ticker30DayLow = data.values[i].low;
-            if (ticker10DayHigh === undefined  || data.values[0].high > ticker10DayHigh) ticker10DayHigh = data.values[i].high;
-            if (ticker10DayLow === undefined  || data.values[0].low < ticker10DayLow) ticker10DayLow = data.values[i].low;
+            if (ticker100DayHigh === undefined  || data.values[i].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
+            if (ticker100DayLow === undefined  || data.values[i].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
+            if (ticker30DayHigh === undefined  || data.values[i].high > ticker30DayHigh) ticker30DayHigh = data.values[i].high;
+            if (ticker30DayLow === undefined  || data.values[i].low < ticker30DayLow) ticker30DayLow = data.values[i].low;
+            if (ticker10DayHigh === undefined  || data.values[i].high > ticker10DayHigh) ticker10DayHigh = data.values[i].high;
+            if (ticker10DayLow === undefined  || data.values[i].low < ticker10DayLow) ticker10DayLow = data.values[i].low;
         }
         else if (i < 30) {
-            if (ticker100DayHigh === undefined  || data.values[0].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
-            if (ticker100DayLow === undefined  || data.values[0].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
-            if (ticker30DayHigh === undefined  || data.values[0].high > ticker30DayHigh) ticker30DayHigh = data.values[i].high;
-            if (ticker30DayLow === undefined  || data.values[0].low < ticker30DayLow) ticker30DayLow = data.values[i].low;
+            if (ticker100DayHigh === undefined  || data.values[i].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
+            if (ticker100DayLow === undefined  || data.values[i].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
+            if (ticker30DayHigh === undefined  || data.values[i].high > ticker30DayHigh) ticker30DayHigh = data.values[i].high;
+            if (ticker30DayLow === undefined  || data.values[i].low < ticker30DayLow) ticker30DayLow = data.values[i].low;
         }
         else {
-            if (ticker100DayHigh === undefined  || data.values[0].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
-            if (ticker100DayLow === undefined  || data.values[0].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
+            if (ticker100DayHigh === undefined  || data.values[i].high > ticker100DayHigh) ticker100DayHigh = data.values[i].high;
+            if (ticker100DayLow === undefined  || data.values[i].low < ticker100DayLow) ticker100DayLow = data.values[i].low;
         }
     }
 
