@@ -142,7 +142,7 @@ function getTickerInfo(tickerName) {
     return;
 }
 
-const formatter = new Intl.NumberFormat('en-US', {
+const formatCurrency = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
@@ -161,18 +161,18 @@ function buildTickerInfo(data) {
     percentChange = percentChange.toFixed(2);
 
     symbolOpen = symbolOpen.toFixed(2);
-    symbolOpen = formatter.format(symbolOpen);
+    symbolOpen = formatCurrency.format(symbolOpen);
 
     var symbolHigh = parseFloat(data.values[0].high);
     symbolHigh = symbolHigh.toFixed(2);
-    symbolHigh = formatter.format(symbolHigh);
+    symbolHigh = formatCurrency.format(symbolHigh);
 
     var symbolLow = parseFloat(data.values[0].low);
     symbolLow = symbolLow.toFixed(2);
-    symbolLow = formatter.format(symbolLow);
+    symbolLow = formatCurrency.format(symbolLow);
  
     symbolClose = symbolClose.toFixed(2);
-    symbolClose = formatter.format(symbolClose);
+    symbolClose = formatCurrency.format(symbolClose);
 
     var symbolVolume = parseInt(data.values[0].volume, 10);
     symbolVolume = symbolVolume.toLocaleString('en-US');
@@ -243,11 +243,32 @@ function buildFavorites(data) {
             tickerPercentChangeEl.addClass("card-text-winner");
         }
 
+        // Action buttons
+        var btnHTML = `<button class="btn btn-primary savebtn1info" type="button" data-ticker="${tickerSymbol}" data-action="info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-warning savebtn1news" type="button" data-ticker="${tickerSymbol}" data-action="news">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+                                <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
+                                <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-danger savebtn1del" type="button" data-ticker="${tickerSymbol}" data-action="delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                        </button>`;
+
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);
         tickerEl.append(tickerOpeningPriceEl);
         tickerEl.append(tickerCurrentPriceEl);
         tickerEl.append(tickerPercentChangeEl);
+        tickerEl.append(btnHTML);
         $("#favorites").append(tickerEl);
     });
     return;
@@ -327,14 +348,14 @@ $("#searchTicker").on("click", function (event) {
 $("#favorites").on('click', '.btn', function (event) {
     event.preventDefault();
     // Need to check and see if they clicked on Delete, News, or Info buttons
-    let action = event.target.dataset.action;
-    let stockTicker = event.dataset.ticker;
-    if (action = "delete") {
+    let action = event.target.closest("button").dataset.action;
+    let stockTicker = event.target.closest("button").dataset.ticker;
+    if (action == "delete") {
         deleteFavorite(stockTicker);
         getFavoritesInfo();
-    } else if (action = "news") {
+    } else if (action == "news") {
         getNews(stockTicker);
-    } else if (action = "info") {
+    } else if (action == "info") {
         getTickerInfo(stockTicker);
     }
 });
