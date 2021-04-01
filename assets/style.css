@@ -9,7 +9,7 @@
     min-width: 100%;
     min-height: 100%;
   }
-/* syyling of header jumbotron */
+/* styling of header jumbotron */
 .container.jumbo{
     position: relative;
     border-style: solid;
@@ -95,11 +95,11 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     flex-wrap: wrap;
 }
 #favbutton{
-    width: 80px;
     position: relative;
-    bottom: 330px;
-    left:308px
-}
+    width: 80px;
+    bottom: 250px;
+    left: 307px;
+}   
 
 .green{
 background-color: green;
