@@ -136,7 +136,7 @@ function getTickerInfo(tickerName) {
     return;
 }
 
-const formatter = new Intl.NumberFormat('en-US', {
+const formatCurrency = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
@@ -155,18 +155,18 @@ function buildTickerInfo(data) {
     percentChange = percentChange.toFixed(2);
 
     symbolOpen = symbolOpen.toFixed(2);
-    symbolOpen = formatter.format(symbolOpen);
+    symbolOpen = formatCurrency.format(symbolOpen);
 
     var symbolHigh = parseFloat(data.values[0].high);
     symbolHigh = symbolHigh.toFixed(2);
-    symbolHigh = formatter.format(symbolHigh);
+    symbolHigh = formatCurrency.format(symbolHigh);
 
     var symbolLow = parseFloat(data.values[0].low);
     symbolLow = symbolLow.toFixed(2);
-    symbolLow = formatter.format(symbolLow);
+    symbolLow = formatCurrency.format(symbolLow);
  
     symbolClose = symbolClose.toFixed(2);
-    symbolClose = formatter.format(symbolClose);
+    symbolClose = formatCurrency.format(symbolClose);
 
     var symbolVolume = parseInt(data.values[0].volume, 10);
     symbolVolume = symbolVolume.toLocaleString('en-US');
