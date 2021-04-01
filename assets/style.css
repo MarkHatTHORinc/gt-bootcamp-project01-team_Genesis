@@ -18,7 +18,7 @@
     height: 130px;
     top: 190px;
     opacity: 85%;
-    width: 1000px;
+    width: 1060px;
 }
 
 .container.jumbo:hover{
@@ -48,9 +48,9 @@ font-size: 66px;
     border-style: solid;
     border-width: 1px;
     height: 401px;
-    width: 365px;
+    width: 425px;
     position: relative;
-    right: 317px;
+    right: 318px;
     top: 173px;
     background-color: whitesmoke;
     opacity: 85%;
@@ -83,13 +83,13 @@ font-family: Georgia, 'Times New Roman', Times, serif;
 #favorites{
     border-style: solid;
     position: relative;
-    bottom: 227px;
-    height: 400px;
+    bottom: 228px;
+    height: 500px;
     border-width: 1px;
     width: 630px;
     background-color: whitesmoke;
     opacity: 85%;
-    left: 185px;
+    left: 215px;
     flex-direction: row;
     display: flex;
     flex-wrap: wrap;
@@ -97,8 +97,8 @@ font-family: Georgia, 'Times New Roman', Times, serif;
 #favbutton{
     width: 80px;
     position: relative;
-    top: 10px;
-    left:250px
+    bottom: 330px;
+    left:308px
 }
 
 .green{
@@ -228,8 +228,8 @@ div .bgcolor p{
 #container-news{
     border-style: solid;
     border-width: 1px;
-    height: 500px;
-    bottom: 220px;
+    height: 700px;
+    bottom: 320px;
     right: 318px;
     position: relative;
     background-color: whitesmoke;
@@ -247,6 +247,7 @@ div .bgcolor p{
     flex-direction: column;
     display: flex;
     flex-wrap: wrap;
+    
 
 }
 
