@@ -145,7 +145,7 @@ function buildTickerInfo(data) {
     // Create Elements for ticker information
     var symbolHeadingEl = $('<h1>').text(data.meta.symbol);
     var symbolExchangeEl = $('<p>').text(data.meta.exchange);
-    var symbolOpenEl = $('<p>').text(`High: ${symbolOpen}`);
+    var symbolOpenEl = $('<p>').text(`Open: ${symbolOpen}`);
     var symbolHighEl = $('<p>').text(`High: ${symbolHigh}`);
     var symbolLowEl = $('<p>').text(`Low: ${symbolLow}`);
     var symbolCloseEl = $('<p>').text(`Close: ${symbolClose}`);
