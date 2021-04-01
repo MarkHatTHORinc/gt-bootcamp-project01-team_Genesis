@@ -120,19 +120,44 @@ function getTickerInfo(tickerName) {
     return;
 }
 
+
+
 // Build the ticker info section
 // Justin B
 function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
-    var tickerDivEl = $("#ticker-container");
+    var tickerDivEl = $("#tickerInfo");
+    tickerDivEl.empty();
+    var symbolOpen = parseFloat(data.values[0].open);
+    var symbolHigh = parseFloat(data.values[0].high);
+    var symbolLow = parseFloat(data.values[0].low);
+    var symbolClose = parseFloat(data.values[0].close);
+    var percentChange = symbolClose / symbolOpen * 100 - 100;
+    var symbolVolume = data.values[0].volume;
 
     // Create Elements for ticker information
-    var symbolHeadingEl = $('<h2>').text = data.meta.symbol;
+    var symbolHeadingEl = $('<h1>').text(data.meta.symbol);
+    var symbolHighEl = $('<p>').text(`High: ${symbolHigh}`);
+    var symbolLowEl = $('<p>').text(`Low: ${symbolLow}`);
+    var symbolCloseEl = $('<p>').text(`Close: ${symbolClose}`);
+    var percentChangeEl = $('<p>').text(`Change: ${percentChange}%`);
+    var symbolVolumeEl = $('<p>').text(`Volume: ${symbolVolume}`);
+
+    // Add to favorites button
+    var saveToFavBtnEl = `<button class="btn btn-warning" type="button" id="favbutton" data-ticker="${data.meta.symbol}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                        </button>`;
 
     // Create HTML div to append new elements to render on page....
-    var tickerInfoEl = $('<div>');
-    // tickerInfoEl.append(sybolHeadingEl);
-    // tickerDivEl.append(tickerInfoEl);
+    tickerDivEl.append(symbolHeadingEl);
+    tickerDivEl.append(symbolHighEl);
+    tickerDivEl.append(symbolLowEl);
+    tickerDivEl.append(symbolCloseEl);
+    tickerDivEl.append(percentChangeEl);
+    tickerDivEl.append(symbolVolumeEl);
+    tickerDivEl.append(saveToFavBtnEl);
 
     return;
 }
