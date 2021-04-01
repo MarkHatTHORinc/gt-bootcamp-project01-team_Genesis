@@ -264,9 +264,9 @@ function displayModal(message) {
 }
 
 // Listen for the favorites button to be clicked, add to favorites
-$("#btnAddFavorite").on("click", function (event) {
+$("#tickerInfo").on("click", ".btn" , function (event) {
     event.preventDefault();
-    let stockTicker = event.dataset.ticker;
+    let stockTicker = event.target.parentElement.parentElement.dataset.ticker;
     saveTicker(stockTicker);
 });
 
