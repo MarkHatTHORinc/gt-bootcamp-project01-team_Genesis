@@ -74,6 +74,11 @@ div .bgcolor{
 font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+/* DAVID added */
+.container h5{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
 /* Styling of favorites container */
 #favorites{
     border-style: solid;
@@ -244,10 +249,12 @@ div .bgcolor p{
     flex-wrap: wrap;
 
 }
-#container-news:hover{
+
+/* DAVID removed hover effect  */
+/* #container-news:hover{
     background-color:  rgb(138, 172, 232);
     transition: 1ms;
-}
+} */
 
 
 
