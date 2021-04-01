@@ -145,6 +145,7 @@ function getTickerInfo(tickerName) {
             getNews(tickerName);
         })
         .catch(error => {
+            var tickerDivEl = $("#tickerInfo");
             tickerDivEl.empty();
             var tickerEl = $("<div>");
             var headLineEl = $("<h5>");
