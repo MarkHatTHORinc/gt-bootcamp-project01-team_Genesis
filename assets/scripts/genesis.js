@@ -1,12 +1,11 @@
-var debug = "false";
-// var newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
-var newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
-var tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
-var favoritesArray = [];
-const topStories = "TOP STORIES";
+var debug = "false";  // debug=true will cause news api to read local file
+var favoritesArray = [];     // Used to order & display favorite stock tickers
+// const newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
+const newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
+const tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
+const topStories = "TOP STORIES";   // Used on page load to get top news stories
 
 // Delete ticker symbol from local storage and favoritesArray
-// Mark H - completed
 function deleteFavorite(stockTicker) {
     // Remove from Array
     // 1. Find the stock ticker in the array
@@ -24,7 +23,6 @@ function deleteFavorite(stockTicker) {
 }
 
 // Save ticker symbol to local storage
-// Mark H -- completed
 function saveTicker(stockTicker) {
     // Only store the stock ticker if it hasn't been previously stored
     stockTicker = stockTicker.toUpperCase();
@@ -42,41 +40,46 @@ function saveTicker(stockTicker) {
 }
 
 // Get News Web API Call
-// David Figueroa
 function getNews(stockTicker) {
+    // If not in debug mode make api call for news
     if (debug === "false") {
         var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey}&q=${stockTicker}&topic=business&country=us`);
         if (stockTicker === topStories) {
             newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey}&topic=business&country=us`);
         }
-    } else {
+    } else {   // If in debug mode use the locally stored file for new
         var newsApiUrl = "./assets/testData/gnews.JSON"
     }
 
 
     fetch(newsApiUrl, {
-        method: 'GET', //GET is the default.
+        method: 'GET',              // GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
-        redirect: 'follow', // manual, *follow, error
-        cache: 'reload'  // Refresh the cache
+        redirect: 'follow',         // manual, *follow, error
+        cache: 'reload'             // Refresh the cache
     })
         .then(response => {
             return response.json();
         })
         .then(data => {
-            // Build the Favorites section
+            // Build the News section
             buildNews(data);
         })
         .catch(error => {
-            // We need something besides an alert
-            // alert('Stock Symbol entered is not valid.');
+            $("#container-news").empty();
+            var newsEl = $("<div>");
+            var headLineEl = $("<h5>");
+            headLineEl.text("News is Not Currently Available");
+            newsEl.append(headLineEl);
+            $("#container-news").append(newsEl);
+            if (debut === "true") {
+                console.log(error);
+            }
         });
-
     return;
 }
 
 // Get Favorites Info
-// Justin Byrd
 function getFavoritesInfo() {
     if (favoritesArray.length == 0) {
         //nothing to build
@@ -100,13 +103,13 @@ function getFavoritesInfo() {
 }
 
 // Get Ticker Info for left hand side
-// Justin B
 function getTickerInfo(tickerName) {
     var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${tickerName}&interval=1day&outputsize=100&apikey=${tickerApiKey}`);
     fetch(stockApiUrl, {
-        method: 'GET', //GET is the default.
+        method: 'GET',              // GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
-        redirect: 'follow', // manual, *follow, error
+        redirect: 'follow',         // manual, *follow, error
+        cache: 'reload'             // Refresh the cache
     })
         .then(function (response) {
             return response.json();
@@ -123,7 +126,6 @@ function getTickerInfo(tickerName) {
 
 
 // Build the ticker info section
-// Justin B
 function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
     var tickerDivEl = $("#tickerInfo");
@@ -168,7 +170,6 @@ function buildTickerInfo(data) {
 }
 
 // Build the favorites section
-// Justin B
 function buildFavorites(data) {
     // Clear out any previous favorites html elements
     $("#favorites").empty();
@@ -180,7 +181,7 @@ function buildFavorites(data) {
         var tickerSymbol = ticker.meta.symbol;
         var tickerOpeningPrice = parseFloat(ticker.values[0].open);
         var tickerCurrentPrice = parseFloat(ticker.values[0].close);
-        percentChange = (tickerCurrentPrice/tickerOpeningPrice) * 100 - 100;
+        percentChange = (tickerCurrentPrice / tickerOpeningPrice) * 100 - 100;
 
         // Set decimal places
         tickerOpeningPrice = tickerOpeningPrice.toFixed(2);
@@ -192,7 +193,7 @@ function buildFavorites(data) {
         var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  $${tickerOpeningPrice}`);
         var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
         var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}%`);
-        
+
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);
         tickerEl.append(tickerOpeningPriceEl);
@@ -204,24 +205,22 @@ function buildFavorites(data) {
 }
 
 // Build the news section
-// David F
 function buildNews(data) {
     // Clear out any previous news html elements
     $("#container-news").empty();
-    // make sure we have at least three articles
+    // Make sure we have at max three articles
     var articleCount = data.totalArticles;
     if (articleCount > 3) {
         articleCount = 3;
     }
 
-
     for (var i = 0; i < articleCount; i++) {
-            // create elements for news
-    var newsEl = $("<div>");
-    var headLineEl = $("<h5>");
-    var sourceEl = $("<b>");
-    var descriptionEl = $("<i>");
-    var newsLinkEl = $("<a>");
+        // create elements for news
+        var newsEl = $("<div>");
+        var headLineEl = $("<h5>");
+        var sourceEl = $("<b>");
+        var descriptionEl = $("<i>");
+        var newsLinkEl = $("<a>");
         headLineEl.text(data.articles[i].title);
         newsLinkEl.attr("href", data.articles[i].url);
         newsLinkEl.append(headLineEl);
@@ -229,7 +228,7 @@ function buildNews(data) {
         // sourceEl.attr("src", data.articles[i].source.name);
         // sourceEl.attr("style", "height: 120px; width: 80px");
         descriptionEl.text(`    ${data.articles[i].content}`);
-        
+
         newsEl.append(newsEl, newsLinkEl, sourceEl, descriptionEl);
         $("#container-news").append(newsEl);
     }
@@ -245,13 +244,20 @@ function displayModal(message) {
     return;
 }
 
-// When the user clicks on <span> (x), close the modal
+// Listen for the favorites button to be clicked, add to favorites
+$("#btnAddFavorite").on("click", function (event) {
+    event.preventDefault();
+    let stockTicker = event.dataset.ticker;
+    saveTicker(stockTicker);
+});
+
+// Listen for the <span> (x) to be clicked, close the modal
 $("#closeModal").on("click", function (event) {
+    event.preventDefault();
     modal.style.display = "none";
 });
 
 // Listen for the search button to be clicked
-// Mark H - completed
 $("#searchTicker").on("click", function (event) {
     // Preventing the button from trying to submit the form......
     event.preventDefault();
@@ -270,7 +276,6 @@ $("#searchTicker").on("click", function (event) {
 });
 
 // Listen for one of the favorites to be clicked
-// Mark H - completed
 $("#favorites").on('click', '.btn', function (event) {
     event.preventDefault();
     // Need to check and see if they clicked on Delete, News, or Info buttons
@@ -284,10 +289,9 @@ $("#favorites").on('click', '.btn', function (event) {
     } else if (action = "info") {
         getTickerInfo(stockTicker);
     }
-
 });
 
-// See if we are in debug mode - make debug=false the default
+// See if we are in debug mode - default: debug=false 
 debug = localStorage.getItem("debug");
 if (debug !== "true") {
     debug = "false";
