@@ -2,7 +2,8 @@ var debug = "false";  // debug=true will cause news api to read local file
 var favoritesArray = [];     // Used to order & display favorite stock tickers
 // const newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
 const newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
-const tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
+// const tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";    // Justin B
+const tickerApiKey = "f7965dfc06b54da79a51cf9966e8bcca";    // Mark H
 const topStories = "TOP STORIES";   // Used on page load to get top news stories
 
 // Delete ticker symbol from local storage and favoritesArray
@@ -86,7 +87,11 @@ function getFavoritesInfo() {
         //nothing to build
         return;
     }
+    // if (debug === "false") {
     var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
+    // } else {   // If in debug mode use the locally stored file for new
+    //     var newsApiUrl = "./assets/testData/twelve.JSON"
+    // }
 
     fetch(stockApiUrl)
         .then(response => {
@@ -97,8 +102,15 @@ function getFavoritesInfo() {
             buildFavorites(data);
         })
         .catch(error => {
-            // We need something besides an alert
-            // alert('Stock Symbol entered is not valid.');
+            $("#favorites").empty();
+            var favoritesEl = $("<div>");
+            var headLineEl = $("<h5>");
+            headLineEl.text("Stock Info is Not Currently Available");
+            favoritesEl.append(headLineEl);
+            $("#favorites").append(favoritesEl);
+            if (debug === "true") {
+                console.log(error);
+            }
         });
     return;
 }
@@ -156,7 +168,8 @@ function buildTickerInfo(data) {
     symbolClose = symbolClose.toFixed(2);
     symbolClose = formatter.format(symbolClose);
 
-    var symbolVolume = data.values[0].volume;
+    var symbolVolume = parseInt(data.values[0].volume, 10);
+    symbolVolume = symbolVolume.toLocaleString('en-US');
 
     // Create Elements for ticker information
     var symbolHeadingEl = $('<span>').text(data.meta.symbol);
@@ -166,6 +179,11 @@ function buildTickerInfo(data) {
     var symbolLowEl = $('<p>').text(`Low: ${symbolLow}`);
     var symbolCloseEl = $('<p>').text(`Close: ${symbolClose}`);
     var percentChangeEl = $('<p>').text(`Change: ${percentChange}%`);
+    if (percentChange < 0) {
+        percentChangeEl.addClass("loser");
+    } else {
+        percentChangeEl.addClass("winner");
+    }
     var symbolVolumeEl = $('<p>').text(`Volume: ${symbolVolume}`);
 
     // Add to favorites button
@@ -186,7 +204,6 @@ function buildTickerInfo(data) {
     tickerDivEl.append(percentChangeEl);
     tickerDivEl.append(symbolVolumeEl);
     
-
     return;
 }
 
@@ -213,7 +230,12 @@ function buildFavorites(data) {
         var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
         var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  $${tickerOpeningPrice}`);
         var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
-        var tickerPercentChangeEl = $("<p class='card-text'>").text(`Percent Change:  ${percentChange}%`);
+        var tickerPercentChangeEl = $("<p >").text(`Percent Change:  ${percentChange}%`);
+        if (percentChange < 0) {
+            tickerPercentChangeEl.addClass("card-text-loser");
+        } else {
+            tickerPercentChangeEl.addClass("card-text-winner");
+        }
 
         // Append elements to forecastEl
         tickerEl.append(tickerSymbolEl);

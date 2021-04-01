@@ -262,17 +262,29 @@ div .bgcolor p{
     transition: 1ms;
 } */
 
-
-
 /* Styling for cards from API Favorites */
 body .card-text{
     font-size: 0.8rem;
-
+}
+body .card-text-winner{
+    font-size: 0.8rem;
+    color: black;
+    background-color: chartreuse;
+}
+body .card-text-loser{
+    font-size: 0.8rem;
+    background-color: crimson;
 }
 
+.winner{
+    background-color: chartreuse;
+}
+
+.loser{
+    background-color: crimson;
+}
 
 /* Styling for Modal */
-
 .modal-title{
     font-family:monospace;
     position: relative;
