@@ -1,7 +1,7 @@
 var debug = "false";  // debug=true will cause news api to read local file
 var favoritesArray = [];     // Used to order & display favorite stock tickers
-// const newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
-const newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
+const newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
+// const newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
 const tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";
 const topStories = "TOP STORIES";   // Used on page load to get top news stories
 
