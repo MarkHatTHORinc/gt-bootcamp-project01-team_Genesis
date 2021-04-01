@@ -133,10 +133,13 @@ function buildTickerInfo(data) {
     var symbolLow = parseFloat(data.values[0].low);
     var symbolClose = parseFloat(data.values[0].close);
     var percentChange = symbolClose / symbolOpen * 100 - 100;
+    percentChange = percentChange.toFixed(2);
     var symbolVolume = data.values[0].volume;
 
     // Create Elements for ticker information
     var symbolHeadingEl = $('<h1>').text(data.meta.symbol);
+    var symbolExchangeEl = $('<p>').text(data.meta.exchange);
+    var symbolOpenEl = $('<p>').text(`High: ${symbolOpen}`);
     var symbolHighEl = $('<p>').text(`High: ${symbolHigh}`);
     var symbolLowEl = $('<p>').text(`Low: ${symbolLow}`);
     var symbolCloseEl = $('<p>').text(`Close: ${symbolClose}`);
@@ -152,6 +155,8 @@ function buildTickerInfo(data) {
 
     // Create HTML div to append new elements to render on page....
     tickerDivEl.append(symbolHeadingEl);
+    tickerDivEl.append(symbolExchangeEl);
+    tickerDivEl.append(symbolOpenEl);
     tickerDivEl.append(symbolHighEl);
     tickerDivEl.append(symbolLowEl);
     tickerDivEl.append(symbolCloseEl);
