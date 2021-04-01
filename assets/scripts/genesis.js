@@ -115,7 +115,7 @@ function getTickerInfo(tickerName) {
             // Build the Ticker Section
             buildTickerInfo(data);
             // Get the news for this ticker symbol
-            // getNews(tickerName);
+            getNews(tickerName);
         });
     return;
 }
@@ -292,4 +292,4 @@ favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
-// getNews(topStories);
+getNews(topStories);
