@@ -101,6 +101,11 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     left: 307px;
 }   
 
+#btnAddFavorite{
+    position: relative;
+    width: 80px;
+    left: 270px;
+}
 .green{
 background-color: green;
 }
