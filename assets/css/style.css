@@ -47,7 +47,7 @@ font-size: 66px;
 #ticker-container{
     border-style: solid;
     border-width: 1px;
-    height: 551px;
+    height: 400px;
     width: 425px;
     position: relative;
     right: 318px;
@@ -83,8 +83,8 @@ font-family: Georgia, 'Times New Roman', Times, serif;
 #favorites{
     border-style: solid;
     position: relative;
-    bottom: 498px;
-    height: 500px;
+    bottom: 347px;
+    height: 490px;
     border-width: 1px;
     width: 630px;
     background-color: whitesmoke;
@@ -93,20 +93,38 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     flex-direction: row;
     display: flex;
     flex-wrap: wrap;
+    flex-grow: 1;
+    height: auto;
 }
 
-#favbutton{
-    position: relative;
-    width: 80px;
-    bottom: 250px;
-    left: 307px;
-}   
+.card{
+margin-top: 8px;
+}
+
+#btnAddFavorite:hover{
+ transition: all .2s ease-in-out; 
+ transform: scale(1.1); 
+}
+
+.savebtn1info:hover{
+    transition: all .2s ease-in-out; 
+    transform: scale(1.1); 
+}
+
+.savebtn1news:hover{
+    transition: all .2s ease-in-out; 
+    transform: scale(1.1); 
+}
+
+.savebtn1del:hover{
+    transition: all .2s ease-in-out; 
+    transform: scale(1.1); 
+}
 
 .savebtn1info{
 display: flex;
 flex-direction: row;
 width: 40px;
-
 }
 
 .savebtn1news{
@@ -145,15 +163,14 @@ background-color: rgb(167, 40, 40);
     border-style: solid;
     border-width: 1px;
     height: 630px;
-    bottom: 445px;
+    height: auto;
+    flex-grow: 1;
+    bottom: 520px;
     right: 318px;
     position: relative;
     background-color: whitesmoke;
     opacity: 85%;
     width: 425px;
-    transition-property:all;
-    transition-duration: 1s;
-    transition-delay: 0s;
 }
 
 #container-news h4{
