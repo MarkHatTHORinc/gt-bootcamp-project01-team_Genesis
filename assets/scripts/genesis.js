@@ -171,9 +171,6 @@ function buildTickerInfo(data) {
     // Clear out ticker info for searched ticker symbol
     var tickerDivEl = $("#tickerInfo");
     tickerDivEl.empty();
-<<<<<<< HEAD
- 
-=======
 
     var ticker100DayHigh, ticker100DayLow, ticker30DayHigh, ticker30DayLow, ticker10DayHigh, ticker10DayLow;
     for (i = 0; i < 100; i++) {
@@ -197,7 +194,6 @@ function buildTickerInfo(data) {
         }
     }
 
->>>>>>> 7350f5fabceb269e5b6da5ae4a5ceeec1749057a
     var symbolOpen = parseFloat(data.values[0].open);
     var symbolClose = parseFloat(data.values[0].close);
  
