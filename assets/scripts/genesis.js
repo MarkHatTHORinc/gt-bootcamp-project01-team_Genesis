@@ -4,7 +4,8 @@ var debugStock = "false";  // debug=true will cause news api to read local file
 var favoritesArray = [];     // Used to order & display favorite stock tickers
 // const newsApiKey = "2fa72563c6d8381eb46abd9e77860156";   // David F
 const newsApiKey = "8c535f1bf34a3d699312fa51b152d476";      // Mark H
-const tickerApiKey = "b84c9659f3944589a5147c448c52a1e3";    // David F
+const tickerApiKey = "c243d7d9b1d14c30bb6ce1ea2a8ae8c0";    // Omari G
+// const tickerApiKey = "b84c9659f3944589a5147c448c52a1e3";    // David F
 // const tickerApiKey = "3553e4e7f6f145e7996a726674defbc4";    // Justin B
 // const tickerApiKey = "f7965dfc06b54da79a51cf9966e8bcca";    // Mark H
 const topStories = "TOP STORIES";   // Used on page load to get top news stories
@@ -233,7 +234,7 @@ function buildTickerInfo(data) {
     var symbolVolumeEl = $('<p>').text(`Volume: ${symbolVolume}`);
 
     // Add to favorites button
-    var saveToFavBtnEl = `<button class="btn btn-warning" type="button" id="btnAddFavorite" data-ticker="${data.meta.symbol}">
+    var saveToFavBtnEl = `<button class="btn btn-warning" type="button" data-toggle="tooltip" data-placement="top" title="Add to Favorites" id="btnAddFavorite" data-ticker="${data.meta.symbol}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                             </svg>
@@ -284,19 +285,19 @@ function buildFavorites(data) {
         }
 
         // Action buttons
-        var btnHTML = `<button class="btn btn-primary savebtn1info" type="button" data-ticker="${tickerSymbol}" data-action="info">
+        var btnHTML = `<button class="btn btn-primary savebtn1info" type="button" data-toggle="tooltip" data-placement="top" title="Get Stock Info" data-ticker="${tickerSymbol}" data-action="info">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                 <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                             </svg>
                         </button>
-                        <button class="btn btn-warning savebtn1news" type="button" data-ticker="${tickerSymbol}" data-action="news">
+                        <button class="btn btn-warning savebtn1news" type="button" data-toggle="tooltip" data-placement="top" title="Get News Stories" data-ticker="${tickerSymbol}" data-action="news">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
                                 <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
                                 <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
                             </svg>
                         </button>
-                        <button class="btn btn-danger savebtn1del" type="button" data-ticker="${tickerSymbol}" data-action="delete">
+                        <button class="btn btn-danger savebtn1del" type="button" data-toggle="tooltip" data-placement="top" title="Remove from Favorites" data-ticker="${tickerSymbol}" data-action="delete">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
