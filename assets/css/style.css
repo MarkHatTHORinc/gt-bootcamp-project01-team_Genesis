@@ -204,20 +204,20 @@ body .card-text-loser{
 }
 
 .modal-body{
-    background-color: rgb(224, 57, 57);
+    background-color: rgb(236, 131, 45);
 }
 
 #modalMessage{
     font-style:italic;
     font-weight: normal;
     position: relative;
-    left: 100px;
+    left: 30px;
     color: white;
     font-family:monospace;
     font-size: 20px;
 }
 div.modal-content{
-    background-color: rgb(224, 57, 57);
+    background-color: rgb(236, 131, 45);
 }
 
 /* Tooltip container */
