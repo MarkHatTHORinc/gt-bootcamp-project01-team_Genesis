@@ -127,16 +127,16 @@ width: 40px;
     bottom: 73px;
 }
 
-
-
 #btnAddFavorite{
     position: relative;
     width: 80px;
     left: 270px;
 }
+
 .green{
 background-color: green;
 }
+
 .red{
 background-color: rgb(167, 40, 40);
 }
