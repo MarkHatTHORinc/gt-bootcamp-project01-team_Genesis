@@ -1,4 +1,4 @@
-# Stock Ticker - Team Genesis - Project 01
+# Stock-Watcher ==> Team Genesis - Project 01
 
 ## Description
 
@@ -11,21 +11,25 @@ The app should operate within the following requirements:
     * A favorites panel showing info for the favorite stocks.
     * News for the stock ticker selected
 2. The block that displays the detailed stock information should show:
-    * the stock symbol
-    * the currency for information 
-    * the high stock price 
-    * today's opening stock price
+    * Stock symbol
+    * Exchange where it is traded
+    * Opening price 
+    * High stock price for current/last day traded 
+    * Low stock price for current/last day traded
+    * Last closing price
+    * Percentage change (should be color coded to denote positive/negatve)
+    * Volume traded for current/last day traded
+    * A button to save to the favorites
 3. The block that displays stock favorites should show:
-    * the stock symbol
-    * percentage change
-    * buttons to allow:
-        * show stock info
-        * show news
-        * delete from favorites
-4. Searched City History will be displayed
-    * When the user clicks on a city in the Searched City History the current and 5-day forecast for that city should be displayed.
-    * Cities should be listed alphabetically and only once in the Searched City History
-5.  The searched stock ticker entered should be:
+    * Stock symbol
+    * Opening price
+    * Current price
+    * Percentage change (should be color coded to denote postive/negative)
+    * Buttons to allow:
+        * Show stock info
+        * Show news
+        * Delete from favorites
+4.  The searched stock ticker entered should be:
     * Capitalized appropriately
     * Prompted for corrections for entries that aren't valid ticker symbols
     * Also display news in the news section
@@ -61,14 +65,15 @@ Navigate to:
 [https://MarkHatTHORinc.github.io/gt-bootcamp-project01-team_Genesis/](https://markhatthorinc.github.io/gt-bootcamp-project01-team_Genesis/)
 
 **Images of App:**
-![Weather Dashboard on Initial Load](./assets/images/WeatherDashboard_Initial.png)
-![Weather Dashboard with One City](./assets/images/WeatherDashboard_OneCity.png)
-![Weather Dashboard with Multiple Cities](./assets/images/WeatherDashboard_MultipleCities.png)
+![Genesis Stock-Watcher on Initial Load](./assets/images/Genesis_Stock-Watcher_Page_Load.png)
+![Genesis Stock-Watcher with Bad Symbol Entered](./assets/images/Genesis_Stock-Watcher_Bad_Symbol.png)
+![Genesis Stock-Watcher Display Ticker Info and Add to Favorites](./assets/images/Genesis_Stock-Watcher_Display_Symbol_and_Add_To_Favorites.png)
 
 
 ## Credits
-
-Trilogy Education Services, LLC, a 2U, Inc. brand
+* Trilogy Education Services, LLC, a 2U, Inc. brand
+* twelvedata.com
+* gnews.io
 
 
 ## License

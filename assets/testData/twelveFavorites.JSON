@@ -1,45 +1,4 @@
-{   "PEP": {
-    "meta": {
-        "symbol": "PEP",
-        "interval": "1day",
-        "currency": "USD",
-        "exchange_timezone": "America/New_York",
-        "exchange": "NASDAQ",
-        "type": "Common Stock"
-    },
-    "values": [
-        {
-            "datetime": "2021-03-31",
-            "open": "121.65000",
-            "high": "123.52000",
-            "low": "121.15000",
-            "close": "122.15000",
-            "volume": "118162900"
-        }
-    ],
-    "status": "ok"
-},
-    "KO": {
-    "meta": {
-        "symbol": "KO",
-        "interval": "1day",
-        "currency": "USD",
-        "exchange_timezone": "America/New_York",
-        "exchange": "NASDAQ",
-        "type": "Common Stock"
-    },
-    "values": [
-        {
-            "datetime": "2021-03-31",
-            "open": "121.65000",
-            "high": "123.52000",
-            "low": "121.15000",
-            "close": "122.15000",
-            "volume": "118162900"
-        }
-    ],
-    "status": "ok"
-},
+{
     "AAPL": {
         "meta": {
             "symbol": "AAPL",
@@ -141,6 +100,48 @@
                 "low": "132.71001",
                 "close": "133.25999",
                 "volume": "4945100"
+            }
+        ],
+        "status": "ok"
+    },
+    "KO": {
+        "meta": {
+            "symbol": "KO",
+            "interval": "1day",
+            "currency": "USD",
+            "exchange_timezone": "America/New_York",
+            "exchange": "NASDAQ",
+            "type": "Common Stock"
+        },
+        "values": [
+            {
+                "datetime": "2021-03-31",
+                "open": "121.65000",
+                "high": "123.52000",
+                "low": "121.15000",
+                "close": "122.15000",
+                "volume": "118162900"
+            }
+        ],
+        "status": "ok"
+    },
+    "PEP": {
+        "meta": {
+            "symbol": "PEP",
+            "interval": "1day",
+            "currency": "USD",
+            "exchange_timezone": "America/New_York",
+            "exchange": "NASDAQ",
+            "type": "Common Stock"
+        },
+        "values": [
+            {
+                "datetime": "2021-03-31",
+                "open": "121.65000",
+                "high": "123.52000",
+                "low": "121.15000",
+                "close": "122.15000",
+                "volume": "118162900"
             }
         ],
         "status": "ok"
