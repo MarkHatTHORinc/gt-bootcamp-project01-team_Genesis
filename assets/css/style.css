@@ -93,7 +93,6 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     flex-direction: row;
     display: flex;
     flex-wrap: wrap;
-    flex-grow: 1;
     height: auto;
 }
 
@@ -163,24 +162,17 @@ background-color: rgb(167, 40, 40);
     border-style: solid;
     border-width: 1px;
     height: 630px;
-    height: auto;
-    flex-grow: 1;
-    bottom: 520px;
-    right: 318px;
-    position: relative;
+    top: 610px;
+    right: 731px;
+    position: absolute;
     background-color: whitesmoke;
     opacity: 85%;
     width: 425px;
+    height: auto;
+    margin-right: 0%;
+    min-height: 630px;
 }
 
-#container-news h4{
-    position: relative;
-    top: 100px;
-    font-size: 36px;
-    flex-direction: column;
-    display: flex;
-    flex-wrap: wrap;
-}
 
 /* DAVID removed hover effect  */
 /* #container-news:hover{
