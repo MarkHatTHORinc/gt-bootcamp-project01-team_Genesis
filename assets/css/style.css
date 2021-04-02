@@ -94,7 +94,11 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
-    
+    height: auto;
+}
+
+.card{
+margin-top: 8px;
 }
 
 #btnAddFavorite:hover{
@@ -159,15 +163,14 @@ background-color: rgb(167, 40, 40);
     border-style: solid;
     border-width: 1px;
     height: 630px;
-    bottom: 433px;
+    height: auto;
+    flex-grow: 1;
+    bottom: 520px;
     right: 318px;
     position: relative;
     background-color: whitesmoke;
     opacity: 85%;
     width: 425px;
-    transition-property:all;
-    transition-duration: 1s;
-    transition-delay: 0s;
 }
 
 #container-news h4{
@@ -218,20 +221,20 @@ body .card-text-loser{
 }
 
 .modal-body{
-    background-color: rgb(224, 57, 57);
+    background-color: rgb(236, 131, 45);
 }
 
 #modalMessage{
     font-style:italic;
     font-weight: normal;
     position: relative;
-    left: 100px;
+    left: 30px;
     color: white;
     font-family:monospace;
     font-size: 20px;
 }
 div.modal-content{
-    background-color: rgb(224, 57, 57);
+    background-color: rgb(236, 131, 45);
 }
 
 /* Tooltip container */
