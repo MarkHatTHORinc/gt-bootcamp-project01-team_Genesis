@@ -47,7 +47,7 @@ font-size: 66px;
 #ticker-container{
     border-style: solid;
     border-width: 1px;
-    height: 400px;
+    height: 551px;
     width: 425px;
     position: relative;
     right: 318px;
@@ -83,8 +83,8 @@ font-family: Georgia, 'Times New Roman', Times, serif;
 #favorites{
     border-style: solid;
     position: relative;
-    bottom: 347px;
-    height: 490px;
+    bottom: 498px;
+    height: 500px;
     border-width: 1px;
     width: 630px;
     background-color: whitesmoke;
@@ -93,37 +93,20 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     flex-direction: row;
     display: flex;
     flex-wrap: wrap;
-    height: auto;
 }
 
-.card{
-margin-top: 8px;
-}
-
-#btnAddFavorite:hover{
- transition: all .2s ease-in-out; 
- transform: scale(1.1); 
-}
-
-.savebtn1info:hover{
-    transition: all .2s ease-in-out; 
-    transform: scale(1.1); 
-}
-
-.savebtn1news:hover{
-    transition: all .2s ease-in-out; 
-    transform: scale(1.1); 
-}
-
-.savebtn1del:hover{
-    transition: all .2s ease-in-out; 
-    transform: scale(1.1); 
-}
+#favbutton{
+    position: relative;
+    width: 80px;
+    bottom: 250px;
+    left: 307px;
+}   
 
 .savebtn1info{
 display: flex;
 flex-direction: row;
 width: 40px;
+
 }
 
 .savebtn1news{
@@ -162,17 +145,25 @@ background-color: rgb(167, 40, 40);
     border-style: solid;
     border-width: 1px;
     height: 630px;
-    top: 610px;
-    right: 731px;
-    position: absolute;
+    bottom: 445px;
+    right: 318px;
+    position: relative;
     background-color: whitesmoke;
     opacity: 85%;
     width: 425px;
-    height: auto;
-    margin-right: 0%;
-    min-height: 630px;
+    transition-property:all;
+    transition-duration: 1s;
+    transition-delay: 0s;
 }
 
+#container-news h4{
+    position: relative;
+    top: 100px;
+    font-size: 36px;
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 /* DAVID removed hover effect  */
 /* #container-news:hover{
@@ -213,20 +204,20 @@ body .card-text-loser{
 }
 
 .modal-body{
-    background-color: rgb(236, 131, 45);
+    background-color: rgb(224, 57, 57);
 }
 
 #modalMessage{
     font-style:italic;
     font-weight: normal;
     position: relative;
-    left: 30px;
+    left: 100px;
     color: white;
     font-family:monospace;
     font-size: 20px;
 }
 div.modal-content{
-    background-color: rgb(236, 131, 45);
+    background-color: rgb(224, 57, 57);
 }
 
 /* Tooltip container */

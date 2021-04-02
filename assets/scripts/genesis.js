@@ -75,7 +75,7 @@ function saveTicker(stockTicker) {
 function getNews(stockTicker) {
     // If not in debug mode make api call for news
     if (debugNews === "false") {
-        var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey[newsIndex]}&q=${stockTicker}&topic=business&country=us`);
+        var newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey[newsIndex]}&topic=business&country=us&q=${stockTicker}`);
         // If this is the page load "TOP STORIES" will be passed to get Top Business Stories of the day - the API URL format is a bit different
         if (stockTicker === topStories) {
             newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey[newsIndex]}&topic=business&country=us`)
@@ -119,7 +119,7 @@ function getNews(stockTicker) {
 }
 
 // --------------------------------------------------------------------------------------------------------------
-// Function: getFavoirtesInfo
+// Function: getFavoritesInfo
 // Purpose:  Retrieve news stock ticker information for each symbol in the favoritesArray. Since there is a
 //           limit to how many times the free api can be called do a couple of things:
 //             1) Cycle through an array of API keys to increase the number of calls we can have
@@ -129,7 +129,7 @@ function getNews(stockTicker) {
 // --------------------------------------------------------------------------------------------------------------
 function getFavoritesInfo() {
     if (favoritesArray.length == 0) {
-        // There are not any favoirtes to display so just return
+        // There are not any favorites to display so just return
         return;
     }
     // If not in debug mode make api call for stock info
@@ -327,27 +327,27 @@ function buildTickerInfo(data) {
 
     var symbolOpen = parseFloat(data.values[0].open);
     var symbolClose = parseFloat(data.values[0].close);
-
+ 
     var percentChange = symbolClose / symbolOpen * 100 - 100;
     percentChange = percentChange.toFixed(2);
-
+ 
     symbolOpen = symbolOpen.toFixed(2);
     symbolOpen = formatCurrency.format(symbolOpen);
-
+ 
     var symbolHigh = parseFloat(data.values[0].high);
     symbolHigh = symbolHigh.toFixed(2);
     symbolHigh = formatCurrency.format(symbolHigh);
-
+ 
     var symbolLow = parseFloat(data.values[0].low);
     symbolLow = symbolLow.toFixed(2);
     symbolLow = formatCurrency.format(symbolLow);
 
     symbolClose = symbolClose.toFixed(2);
     symbolClose = formatCurrency.format(symbolClose);
-
+ 
     var symbolVolume = parseInt(data.values[0].volume, 10);
     symbolVolume = symbolVolume.toLocaleString('en-US');
-
+ 
     // Create Elements for ticker information
     var symbolHeadingEl = $('<span>').text(data.meta.symbol);
     var symbolExchangeEl = $('<p>').text(`Exchange: ${data.meta.exchange}`);
@@ -363,14 +363,14 @@ function buildTickerInfo(data) {
         percentChangeEl.addClass("winner");
     }
     var symbolVolumeEl = $('<p>').text(`Volume: ${symbolVolume}`);
-
+ 
     // Add to favorites button
     var saveToFavBtnEl = `<button class="btn btn-warning" type="button" data-toggle="tooltip" data-placement="top" title="Add to Favorites" id="btnAddFavorite" data-ticker="${data.meta.symbol}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                             </svg>
                         </button>`;
-
+ 
     // Create HTML div to append new elements to render on page....
     tickerDivEl.append(symbolHeadingEl, saveToFavBtnEl, symbolExchangeEl, symbolOpenEl, symbolHighEl, symbolLowEl, symbolCloseEl, percentChangeEl, symbolVolumeEl);
 
@@ -391,7 +391,7 @@ function buildNews(data) {
     if (articleCount > 3) {
         articleCount = 3;
     }
-
+ 
     for (var i = 0; i < articleCount; i++) {
         // create elements for news
         var newsEl = $("<div>");
@@ -456,7 +456,7 @@ $("#searchTicker").on("click", function (event) {
     event.preventDefault();
     // Get the ticker entereed
     var tickerInput = $("#tickerInput").val().trim();
-
+ 
     //Verify a ticker symbol was entered
     if (tickerInput === "" || tickerInput == "undefined") {
         // Put a message of invalid input in the input box and display modal with message
@@ -516,3 +516,5 @@ favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
 getFavoritesInfo();
 // Get the top news stories on load and build news section
 getNews(topStories);
+ 
+
