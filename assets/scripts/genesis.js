@@ -75,7 +75,7 @@ function saveTicker(stockTicker) {
 function getNews(stockTicker) {
     // If not in debug mode make api call for news
     if (debugNews === "false") {
-        var newsApiUrl = encodeURI(`https://gnews.io/api/v4/search?token=${newsApiKey[newsIndex]}&q=${stockTicker}&topic=business&country=us`);
+        var newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey[newsIndex]}&topic=business&country=us&q=${stockTicker}`);
         // If this is the page load "TOP STORIES" will be passed to get Top Business Stories of the day - the API URL format is a bit different
         if (stockTicker === topStories) {
             newsApiUrl = encodeURI(`https://gnews.io/api/v4/top-headlines?token=${newsApiKey[newsIndex]}&topic=business&country=us`)
@@ -119,7 +119,7 @@ function getNews(stockTicker) {
 }
 
 // --------------------------------------------------------------------------------------------------------------
-// Function: getFavoirtesInfo
+// Function: getFavoritesInfo
 // Purpose:  Retrieve news stock ticker information for each symbol in the favoritesArray. Since there is a
 //           limit to how many times the free api can be called do a couple of things:
 //             1) Cycle through an array of API keys to increase the number of calls we can have
@@ -129,7 +129,7 @@ function getNews(stockTicker) {
 // --------------------------------------------------------------------------------------------------------------
 function getFavoritesInfo() {
     if (favoritesArray.length == 0) {
-        // There are not any favoirtes to display so just return
+        // There are not any favorites to display so just return
         return;
     }
     // If not in debug mode make api call for stock info
