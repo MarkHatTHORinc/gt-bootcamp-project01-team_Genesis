@@ -87,11 +87,11 @@ function getFavoritesInfo() {
         //nothing to build
         return;
     }
-    // if (debug === "false") {
+    if (debug === "false") {
     var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey}`);
-    // } else {   // If in debug mode use the locally stored file for new
-    //     var newsApiUrl = "./assets/testData/twelve.JSON"
-    // }
+    } else {   // If in debug mode use the locally stored file for new
+        var newsApiUrl = "./assets/testData/twelve.JSON"
+    }
 
     fetch(stockApiUrl)
         .then(response => {
