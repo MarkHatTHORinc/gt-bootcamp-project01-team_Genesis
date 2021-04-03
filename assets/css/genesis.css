@@ -20,6 +20,9 @@ body{
 header{
     grid-column: 1 / span 2;
     grid-row: 1 / span 1;
+    margin-right: 0%;
+    width: 100%;
+    margin-left: 10px;
 }
 
 /* styling of header jumbotron */
@@ -70,6 +73,8 @@ section{
     order: 1;
     border-style: solid;
     border-width: 1px;
+    width: 60%;
+    margin-right: 0%;
     /* height: 400px;
     width: 425px;
     position: relative;
@@ -82,12 +87,14 @@ section{
 /* Styling of favorites container */
 #favorites{
     grid-column: 2 / span 1;
-    grid-row: 2 / span 2;
+    grid-row: 2 / span 1;
     border-style: solid;
     border-width: 1px;
     /* position: relative; */
     /* height: 490px; */
     height: auto;
+    margin-left: 0%;
+    max-width: 75%;
     /* width: 630px;
     bottom: 347px;
     left: 213px;
@@ -110,7 +117,7 @@ section{
     border-width: 1px;
     /* height: 630px; */
     height: auto;
-    width: 425px;
+    width: 60%;
     /* position: absolute; */
     /* top: 610px;
     right: 1057px;
@@ -177,7 +184,7 @@ width: 40px;
     width: 40px;
     position: relative;
     left: 60px;
-    bottom: 35px;
+    bottom: 40px;
 }
 
 .savebtn1del{
@@ -186,7 +193,7 @@ width: 40px;
     width: 40px;
     position: relative;
     left: 113px;
-    bottom: 73px;
+    bottom: 80px;
 }
 
 #btnAddFavorite{
