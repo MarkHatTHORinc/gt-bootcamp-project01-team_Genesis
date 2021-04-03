@@ -240,13 +240,14 @@ function buildFavorites(data) {
     // Clear out any previous favorites html elements
     $("#favorites").empty();
     // create elements for favorites
-    Object.values(data).forEach(ticker => {
+    if (favoritesArray.length == 1) {
         // Creating ticker div
         var tickerEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 10.5rem; height: 12rem;'>");
         // Extract values to be displayed
-        var tickerSymbol = ticker.meta.symbol;
-        var tickerOpeningPrice = parseFloat(ticker.values[0].open);
-        var tickerCurrentPrice = parseFloat(ticker.values[0].close);
+        var tickerSymbol = data.meta.symbol;
+        var tickerOpeningPrice = parseFloat(data.values[0].open);
+        var tickerCurrentPrice = parseFloat(data.values[0].close);
+        
         percentChange = (tickerCurrentPrice / tickerOpeningPrice) * 100 - 100;
 
         // Set decimal places
@@ -288,9 +289,62 @@ function buildFavorites(data) {
         // Append elements to tickerEl and then add to the favorites section
         tickerEl.append(tickerSymbolEl, tickerOpeningPriceEl, tickerCurrentPriceEl, tickerPercentChangeEl, btnHTML);
         $("#favorites").append(tickerEl);
-    });
-    return;
-}
+    }
+    else {
+        Object.values(data).forEach(ticker => {
+            // Creating ticker div
+            var tickerEl = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 10.5rem; height: 12rem;'>");
+            // Extract values to be displayed
+            var tickerSymbol = ticker.meta.symbol;
+            var tickerOpeningPrice = parseFloat(ticker.values[0].open);
+            var tickerCurrentPrice = parseFloat(ticker.values[0].close);
+           
+            percentChange = (tickerCurrentPrice / tickerOpeningPrice) * 100 - 100;
+    
+            // Set decimal places
+            tickerOpeningPrice = tickerOpeningPrice.toFixed(2);
+            tickerCurrentPrice = tickerCurrentPrice.toFixed(2);
+            percentChange = percentChange.toFixed(2);
+    
+            // Creating tags with the result items
+            var tickerSymbolEl = $("<h4 class='card-title'>").text(tickerSymbol);
+            var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  $${tickerOpeningPrice}`);
+            var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
+            var tickerPercentChangeEl = $("<p >").text(`Percent Change:  ${percentChange}%`);
+            if (percentChange < 0) {
+                tickerPercentChangeEl.addClass("card-text-loser");
+            } else {
+                tickerPercentChangeEl.addClass("card-text-winner");
+            }
+    
+            // Action buttons (ticker info, show news for symbol, remove symbol from favorites)
+            var btnHTML = `<button class="btn btn-primary savebtn1info" type="button" data-toggle="tooltip" data-placement="top" title="Get Stock Info" data-ticker="${tickerSymbol}" data-action="info">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 24 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </button>
+                            <button class="btn btn-warning savebtn1news" type="button" data-toggle="tooltip" data-placement="top" title="Get News Stories" data-ticker="${tickerSymbol}" data-action="news">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 24 16">
+                                    <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
+                                    <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                                </svg>
+                            </button>
+                            <button class="btn btn-danger savebtn1del" type="button" data-toggle="tooltip" data-placement="top" title="Remove from Favorites" data-ticker="${tickerSymbol}" data-action="delete">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewBox="0 0 24 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                            </button>`;
+    
+            // Append elements to tickerEl and then add to the favorites section
+            tickerEl.append(tickerSymbolEl, tickerOpeningPriceEl, tickerCurrentPriceEl, tickerPercentChangeEl, btnHTML);
+            $("#favorites").append(tickerEl);
+        })
+    }
+return;
+};
+
 
 // --------------------------------------------------------------------------------------------------------------
 // Function: buildTickerInfo
