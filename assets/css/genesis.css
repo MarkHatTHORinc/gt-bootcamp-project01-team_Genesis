@@ -27,14 +27,8 @@ header{
 
 /* styling of header jumbotron */
 .container.jumbo{
-    /* position: relative;
-    border-style: solid;
-    border-width: 1px; */
     background-color: whitesmoke;
-    /* height: 130px;
-    top: 75px; */
     opacity: 85%;
-    /* width: 1060px; */
 }
 
 .container.jumbo:hover{
@@ -60,12 +54,6 @@ font-size: 66px;
     font-style: italic;
 }
 
-section{
-    /* display: grid;
-    grid-template-columns: 2fr 3fr;
-    grid-template-rows: 1/1; */
-}
-
 /* Styling of main ticker contianer */
 #ticker-container{
     grid-column: 1 / span 1;
@@ -74,12 +62,8 @@ section{
     border-style: solid;
     border-width: 1px;
     width: 60%;
+    min-width: 200px;
     margin-right: 0%;
-    /* height: 400px;
-    width: 425px;
-    position: relative;
-    right: 318px;
-    top: 53px; */
     background-color: whitesmoke;
     opacity: 85%;
 }
@@ -90,15 +74,10 @@ section{
     grid-row: 2 / span 1;
     border-style: solid;
     border-width: 1px;
-    /* position: relative; */
-    /* height: 490px; */
     height: auto;
     margin-left: 0%;
     max-width: 75%;
-    /* width: 630px;
-    bottom: 347px;
-    left: 213px;
-    margin-bottom: 100px; */
+
     background-color: whitesmoke;
     opacity: 85%;
     display: flex;
@@ -110,18 +89,11 @@ section{
 
 #container-news{
     grid-column: 1 / span 1;
-    grid-row: 3 / span 1;
-    /* grid-area: 2 / 1 / span 1 / span 1; */
-    /* order: 2; */
+    grid-row: 3 / span 2;
     border-style: solid;
     border-width: 1px;
-    /* height: 630px; */
     height: auto;
     width: 60%;
-    /* position: absolute; */
-    /* top: 610px;
-    right: 1057px;
-    min-height: 630px; */
     background-color: whitesmoke;
     opacity: 85%; 
     margin-right: 0%;
@@ -130,12 +102,6 @@ section{
 
 div .bgcolor{
     background-color: none;
-    /* height: 400px;
-    width: 365px;
-    bottom: 79px;
-    right: 25px;
-    position: relative; */
-    
 }
 
 #ticker-name{
