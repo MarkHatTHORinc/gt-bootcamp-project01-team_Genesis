@@ -62,7 +62,7 @@ font-size: 66px;
     border-style: solid;
     border-width: 1px;
     width: 60%;
-    min-width: 200px;
+    min-width: 450px;
     margin-right: 0%;
     background-color: whitesmoke;
     opacity: 85%;
@@ -77,7 +77,6 @@ font-size: 66px;
     height: auto;
     margin-left: 0%;
     max-width: 75%;
-
     background-color: whitesmoke;
     opacity: 85%;
     display: flex;
@@ -86,14 +85,14 @@ font-size: 66px;
     flex-basis: auto;
 }
 
-
 #container-news{
     grid-column: 1 / span 1;
-    grid-row: 3 / span 2;
+    grid-row: 3 / span 1;
     border-style: solid;
     border-width: 1px;
     height: auto;
     width: 60%;
+    min-width: 450px;
     background-color: whitesmoke;
     opacity: 85%; 
     margin-right: 0%;
@@ -139,9 +138,9 @@ margin-bottom: 8px;
 }
 
 .savebtn1info{
-display: flex;
-flex-direction: row;
-width: 40px;
+    display: flex;
+    flex-direction: row;
+    width: 40px;
 }
 
 .savebtn1news{
@@ -169,11 +168,11 @@ width: 40px;
 }
 
 .green{
-background-color: green;
+    background-color: green;
 }
 
 .red{
-background-color: rgb(167, 40, 40);
+    background-color: rgb(167, 40, 40);
 }
 
 /* Styling for cards from API Favorites */

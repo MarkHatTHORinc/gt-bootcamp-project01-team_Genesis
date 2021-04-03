@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------------------
 // Global Variables Section
 // --------------------------------------------------------------------------------------------------------------
-var debugWeather = "false";    // debug=true will cause news api to read local file
+var debugNews = "false";    // debug=true will cause news api to read local file
 var debugFavorites = "false";  // debug=true will cause news api to read local file
 var debugStock = "false";      // debug=true will cause news api to read local file
 var favoritesArray = [];       // Used to order & display favorite stock tickers
@@ -128,12 +128,13 @@ function getNews(stockTicker) {
 // Returns:  <>
 // --------------------------------------------------------------------------------------------------------------
 function getFavoritesInfo() {
-    if (favoritesArray.length == 0) {
+    if (favoritesArray == null || favoritesArray.length == 0) {
         // There are not any favorites to display so just return
         return;
     }
     // If not in debug mode make api call for stock info
     if (debugFavorites === "false") {
+        console.log(tickerApiKey[tickerIndex]);
         var stockApiUrl = encodeURI(`https://api.twelvedata.com/time_series?symbol=${favoritesArray.join(",")}&interval=1day&outputsize=1&apikey=${tickerApiKey[tickerIndex]}`);
         // Set the index to the next element for the array of API keys
         tickerIndex++;
@@ -254,7 +255,7 @@ function buildFavorites(data) {
         percentChange = percentChange.toFixed(2);
 
         // Creating tags with the result items
-        var tickerSymbolEl = $("<h5 class='card-title'>").text(tickerSymbol);
+        var tickerSymbolEl = $("<h4 class='card-title'>").text(tickerSymbol);
         var tickerOpeningPriceEl = $("<p class='card-text'>").text(`Opening Price:  $${tickerOpeningPrice}`);
         var tickerCurrentPriceEl = $("<p class='card-text'>").text(`Current Price:  $${tickerCurrentPrice}`);
         var tickerPercentChangeEl = $("<p >").text(`Percent Change:  ${percentChange}%`);
@@ -433,7 +434,7 @@ function displayModal(message) {
 // --------------------------------------------------------------------------------------------------------------
 $("#tickerInfo").on("click", ".btn", function (event) {
     event.preventDefault();
-    let stockTicker = event.target.parentElement.parentElement.dataset.ticker;
+    let stockTicker = event.target.closest("button").dataset.ticker;
     saveTicker(stockTicker);
 });
 
@@ -511,7 +512,10 @@ if (debugStock !== "true") {
 }
 
 // Load favorites array from local storage so we have the favorites the user is storing.
-favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
+if (localStorage.getItem("favoriteStocks")) {
+    favoritesArray = JSON.parse(localStorage.getItem("favoriteStocks"));
+}
+
 // Get the Favorites on load and build Favorites section
 getFavoritesInfo();
 // Get the top news stories on load and build news section
